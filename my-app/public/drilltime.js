@@ -12,6 +12,7 @@ function myMove() {
         elem.style.left = pos + "px"; 
       }
     }
+    
   }
   
   function myMove2() {
