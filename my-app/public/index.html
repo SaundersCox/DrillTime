@@ -98,7 +98,7 @@
   .inst-text {
     font-family: Helvetica, sans-serif;
     text-align: center;
-    
+
   }
 </style>
 
@@ -115,11 +115,21 @@
 
   <!-- Icon Bar (Sidebar - hidden on small screens) -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
-      <em class="fa fa-mouse-pointer w3-xxlarge"></em>
-      <p>Select</p>
-    </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-light-green">
+    <button onclick="myMove(this); myMove2()" id=button1>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
+
+        <em class="fa fa-mouse-pointer w3-xxlarge"></em>
+        <p>Select</p>
+      </a>
+    </button>
+    <button onclick="myMove(this); myMove2()" id=button1>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
+
+        <em class="fa fa-mouse-pointer w3-xxlarge"></em>
+        <p>Select</p>
+      </a>
+    </button>
+    <a butclass="w3-bar-item w3-button w3-padding-large w3-hover-light-green">
       <em class="fa fa-plus w3-xxlarge"></em>
       <p>New Performer</p>
     </a>
@@ -155,16 +165,15 @@
 
 
     <!-- Header/Home -->
-    <header class="w3-container w3-padding-32 w3-center w3-light-green" id="home">
+    <!-- <header class="w3-container w3-padding-32 w3-center w3-light-green" id="home">
 
       <h1 class="w3-jumbo w3-white">
 
         <span class="w3-hide-small">DrillTime</span>
 
       </h1>
-      <p></p>
 
-    </header>
+    </header> -->
 
     <!-- Drill Editor Section -->
     <div class="w3-text-grey w3-padding-64" id="about">
@@ -200,7 +209,6 @@
             </div>
           </div>
         </div>
-        <!-- Edit/Modify Tab -->
         <div class="w3-quarter w3-section">
           <span class="w3-xlarge">Performer Editor</span><br>
           <form action="" method="get">
@@ -209,14 +217,29 @@
             <input type="submit" value="Submit">
           </form>
         </div>
-        <!-- End Edit/Modify Tab -->
       </div>
     </div>
     <!-- End Drill Editor Panel -->
 
+    <!-- Data Structure Testing -->
+    <p>Drill Time</p>
+    <div>Select instrument</div>
+    <button onclick="addClarinet()">Clarinet</button>
+    <button onclick="addTrombone()">Trombone</button>
+    <p></p>
+    <div>Drill Editor</div>
+    <button onclick="createP()">Add</button>
+    <button onclick="deleteP()">Delete</button>
+    <button onclick="clearP()">Clear</button>
+    <p></p>
+    <div>Set most recent performers instrument</div>
+    <input type="text" id="myText" value="input instrument...">
+    <button onclick="setInstrument()">Submit</button>
+    <p id="demo"></p>
+    <!-- End Data Structure Testing-->
 
     <!-- Stats Section -->
-    <h3 class="w3-padding-16 w3-text-light-grey">Stats</h3>
+    <!-- <h3 class="w3-padding-16 w3-text-light-grey">Stats</h3>
     <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
       <div class="w3-quarter w3-section">
         <span class="w3-xlarge">20</span><br>
@@ -234,32 +257,32 @@
         <span class="w3-xlarge">45</span><br>
         Notes
       </div>
-    </div>
+    </div> -->
     <!-- End Stats Section -->
 
     <!-- End Drill Editor Section -->
   </div>
 
   <!-- Our Aspirations Section -->
-  <div class="w3-padding-64 w3-content" id="photos">
+  <!-- <div class="w3-padding-64 w3-content" id="photos">
     <h2 class="w3-text-light-grey">Our Aspirations</h2>
-    <hr style="width:200px" class="w3-opacity">
+    <hr style="width:200px" class="w3-opacity"> -->
 
-    <!-- Grid for photos -->
-    <div class="w3-row-padding" style="margin:0 -16px">
+  <!-- Grid  -->
+  <!-- <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-col">
         <ul class="w3-ul w3-row w3-center w3-padding-16 w3-section w3-light-grey">
           <li>Facilitate and augment the process of creating marching drills</li>
           <li>Digitize the process for ease of access</li>
         </ul>
-      </div>
-      <!-- End photo grid -->
-    </div>
-    <!-- End Portfolio Section -->
-  </div>
+      </div> -->
+  <!-- End  grid -->
+  <!-- </div> -->
+  <!-- End Aspirations Section -->
+  <!-- </div> -->
 
   <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-white" id="contact">
+  <!-- <div class="w3-padding-64 w3-content w3-text-white" id="contact">
     <h2 class="w3-text-light-grey">Contact</h2>
     <hr style="width:200px" class="w3-opacity">
 
@@ -267,8 +290,8 @@
       <p><em class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></em> Virginia Tech</p>
       <p><em class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </em> Email: drilltimeapp@gmail.com
       </p>
-    </div><br>
-    <!-- End Contact Section -->
+    </div><br> -->
+  <!-- End Contact Section -->
   </div>
 
   <!-- Footer -->

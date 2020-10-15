@@ -6,7 +6,7 @@ console.log(sampleInput)
 
 
 function myMove(pid) {
-  document.getElementById("button1").disabled = true
+  // TODO document.getElementById("button1").disabled = true
   var elem = document.getElementById(pid);
   var pos = 0;
   var id = setInterval(frame, 20);
@@ -36,4 +36,69 @@ function myMove2() {
       elem.style.left = pos * 2 + "px";
     }
   }
+}
+
+
+// Chung's Code
+var num = 1;
+var instr = "none";
+var person = {number : num, x : 0, y : 0, instrument : instr};
+var performers = [];
+
+//Create new performer object.
+function createP() {
+  person = {number : num, x : 0, y : 0, instrument : instr};	
+  performers.push(person);
+  num++;
+  printOutput(); //Delete later
+}
+
+//Delete most recent performer.
+function deleteP() {
+  performers.pop(person);
+  num--;
+  printOutput(); //Delete later
+}
+
+//Clears all
+function clearP() {
+  performers = [];
+  num = 1;
+  printOutput(); //Delete later
+}
+
+//Set instrument to clarinet
+function addClarinet() {
+  instr = "clarinet";
+}
+//Set instrument to Trombone
+function addTrombone() {
+  instr = "trombone";
+}
+
+//Set most recently added performers instrument to inputted text.
+function setInstrument()	{
+	var inst1 = document.getElementById("myText").value;
+    //instr = inst1; //Delete later
+	performers[performers.length - 1]["instrument"] = inst1;
+    printOutput(); //Delete later
+}
+
+//Set x coordinate
+function setX(xval)	{
+	performers[performers.length - 1]["x"] = xval;
+}
+
+//Set y coordinate
+function setY(yval)	{
+	performers[performers.length - 1]["y"] = yval;
+}
+
+//Print output. Delete later.
+function printOutput()	{
+	var data = "";
+ 	for (i = 0; i < performers.length; i++) {
+  		data += " " +  performers[i]["number"] + " " + performers[i]["instrument"] + ", ";
+	};
+    document.getElementById("demo").innerHTML = data;  
 }
