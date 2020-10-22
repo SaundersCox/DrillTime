@@ -50,9 +50,10 @@
 
   /* Set the width of the sidebar to 120px */
   .w3-sidebar {
+    position: relative;
     width: 120px;
     background: #684;
-    
+    overflow-y: hidden;
   }
 
   /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
@@ -119,60 +120,62 @@
 
   <!-- Icon Bar (Sidebar - hidden on small screens) -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-plus w3-xxlarge"></em>
-        <p>Create</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-chevron-right w3-xxlarge"></em>
-        <p>Next Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-chevron-left w3-xxlarge"></em>
-        <p>Prev Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-hashtag w3-xxlarge"></em>
-        <p>Goto Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-play w3-xxlarge"></em>
-        <p>Play</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-stop w3-xxlarge"></em>
-        <p>Stop</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-download w3-xxlarge"></em>
-        <p>Save</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-upload w3-xxlarge"></em>
-        <p>Load</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-times-circle w3-xxlarge"></em>
-        <p>Clear</p>
-      </a>
-    </button>
+    <div class="navbar">
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-plus w3-xxlarge"></em>
+          <p>Create</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-chevron-right w3-xxlarge"></em>
+          <p>Next Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-chevron-left w3-xxlarge"></em>
+          <p>Prev Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-hashtag w3-xxlarge"></em>
+          <p>Goto Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-play w3-xxlarge"></em>
+          <p>Play</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-stop w3-xxlarge"></em>
+          <p>Stop</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-download w3-xxlarge"></em>
+          <p>Save</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-upload w3-xxlarge"></em>
+          <p>Load</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-times-circle w3-xxlarge"></em>
+          <p>Clear</p>
+        </a>
+      </button>
+    </div>
   </nav>
 
   <!-- Navbar on small screens (Hidden on medium and large screens) -->
