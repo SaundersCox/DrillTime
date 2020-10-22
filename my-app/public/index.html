@@ -24,13 +24,15 @@
     -->
   <title>DrillTime</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="styles.css">
+
 <style>
   body,
   h1,
@@ -48,8 +50,10 @@
 
   /* Set the width of the sidebar to 120px */
   .w3-sidebar {
+    position: relative;
     width: 120px;
     background: #684;
+    overflow-y: hidden;
   }
 
   /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
@@ -107,69 +111,71 @@
 <script src="sandbox.js"></script>
 
 <body onload="load()" class="w3-light-green">
-  <nav class="rightbar w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- <nav class="rightbar w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
       <em class="fa fa-mouse-pointer w3-xxlarge"></em>
       <p>Select</p>
     </a>
-  </nav>
+  </nav> -->
 
   <!-- Icon Bar (Sidebar - hidden on small screens) -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-plus w3-xxlarge"></em>
-        <p>Create</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-chevron-right w3-xxlarge"></em>
-        <p>Next Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-chevron-left w3-xxlarge"></em>
-        <p>Prev Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-hashtag w3-xxlarge"></em>
-        <p>Goto Set</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-play w3-xxlarge"></em>
-        <p>Play</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-stop w3-xxlarge"></em>
-        <p>Stop</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-download w3-xxlarge"></em>
-        <p>Save</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-upload w3-xxlarge"></em>
-        <p>Load</p>
-      </a>
-    </button>
-    <button onclick="myMove(this); myMove2()" id=button1>
-      <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-        <em class="fa fa-times-circle w3-xxlarge"></em>
-        <p>Clear</p>
-      </a>
-    </button>
+    <div class="navbar">
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-plus w3-xxlarge"></em>
+          <p>Create</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-chevron-right w3-xxlarge"></em>
+          <p>Next Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-chevron-left w3-xxlarge"></em>
+          <p>Prev Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-hashtag w3-xxlarge"></em>
+          <p>Goto Set</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-play w3-xxlarge"></em>
+          <p>Play</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-stop w3-xxlarge"></em>
+          <p>Stop</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-download w3-xxlarge"></em>
+          <p>Save</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-upload w3-xxlarge"></em>
+          <p>Load</p>
+        </a>
+      </button>
+      <button onclick="myMove(this); myMove2()" id=button1>
+        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
+          <em class="fa fa-times-circle w3-xxlarge"></em>
+          <p>Clear</p>
+        </a>
+      </button>
+    </div>
   </nav>
 
   <!-- Navbar on small screens (Hidden on medium and large screens) -->
