@@ -121,55 +121,55 @@
   <!-- Icon Bar (Sidebar - hidden on small screens) -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <div class="navbar">
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="create()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-plus w3-xxlarge"></em>
           <p>Create</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="nextSet()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-chevron-right w3-xxlarge"></em>
           <p>Next Set</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="prevSet()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-chevron-left w3-xxlarge"></em>
           <p>Prev Set</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="gotoSet()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-hashtag w3-xxlarge"></em>
           <p>Goto Set</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="play(this)" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-play w3-xxlarge"></em>
           <p>Play</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="stop()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-stop w3-xxlarge"></em>
           <p>Stop</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="save()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-download w3-xxlarge"></em>
           <p>Save</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="load()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-upload w3-xxlarge"></em>
           <p>Load</p>
         </a>
       </button>
-      <button onclick="myMove(this); myMove2()" id=button1>
+      <button onclick="clear()" id=button1>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-times-circle w3-xxlarge"></em>
           <p>Clear</p>
@@ -237,6 +237,9 @@
                 </div>
               </div>
             </div>
+            <img src="ball.svg"
+            style="cursor: pointer; position: absolute; z-index: 1000; left: 208px; top: 152px;" width="40"
+            height="40" id="ball">
           </div>
         </div>
         <div class="w3-quarter w3-section">

@@ -1,3 +1,22 @@
+var numPerformers = 10;
+var curSet = 1
+var numSets = 2;
+var drill = {
+  sets:
+    [
+      {
+        id: 1,
+        x: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        y: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      },
+      {
+        id: 2,
+        x: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        y: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      }
+    ]
+};
+
 // cancel action on a function while it's active
 function load() {
   let sampleInput = { id: 0, inst: "Trumpet" }
@@ -5,7 +24,7 @@ function load() {
 }
 
 
-function myMove(pid) {
+function play(pid) {
   // TODO document.getElementById("button1").disabled = true
   var elem = document.getElementById(pid);
   var pos = 0;
