@@ -17,3 +17,16 @@ button {
 div.navbar {
     height: 100%;
 }
+
+div.performer-editor {
+    display: inline-block;
+}
+
+div.drill-editor {
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+div.drill-editor-panel {
+    width: 100%;
+}
