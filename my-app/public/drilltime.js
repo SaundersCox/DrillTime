@@ -1,20 +1,14 @@
-var numPerformers = 10;
-var curSet = 1
-var numSets = 2;
+
 var drill = {
-  sets:
-    [
-      {
-        id: 1,
-        x: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        y: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-      },
-      {
-        id: 2,
-        x: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        y: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-      }
-    ]
+  performers: [
+    p1,
+    p2,
+    p3,
+    p4,
+    p5,
+    p6
+  ],
+  name: "homegamedrill1"
 };
 
 // cancel action on a function while it's active
@@ -122,36 +116,50 @@ function printOutput() {
   document.getElementById("demo").innerHTML = data;
 }
 
-// Drag and drop code
-ball.onmousedown = function (event) {
-  // (1) prepare to moving: make absolute and on top by z-index
-  ball.style.position = 'absolute';
-  ball.style.zIndex = 1000;
 
-  // move it out of any current parents directly into body
-  // to make it positioned relative to the body
-  document.body.append(ball);
+// Saunders' Code
+function load2() {
+  console.log("hello")
 
-  // centers the ball at (pageX, pageY) coordinates
-  function moveAt(pageX, pageY) {
-    ball.style.left = pageX - ball.offsetWidth / 2 + 'px';
-    ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
-  }
+}
 
-  // move our absolutely positioned ball under the pointer
-  moveAt(event.pageX, event.pageY);
+var pos = 0;
+function createPerformer() {
+  console.log("Create");
+  // $( ".inner" ).append( "<p>Test</p>" );
+  $("#p2").css("left", pos + "px");
+  pos += 50;
+}
+function nextSet() {
+  $("#prevSetButton").show();
+}
+function prevSet() {
 
-  function onMouseMove(event) {
-    moveAt(event.pageX, event.pageY);
-  }
+}
+function gotoSet() {
 
-  // (2) move the ball on mousemove
-  document.addEventListener('mousemove', onMouseMove);
+}
+function playDrill() {
 
-  // (3) drop the ball, remove unneeded handlers
-  ball.onmouseup = function () {
-    document.removeEventListener('mousemove', onMouseMove);
-    ball.onmouseup = null;
-  };
+}
+function stopDrill() {
 
-};
+}
+function saveDrill() {
+
+}
+function loadDrill() {
+
+}
+function clearDrill() {
+
+}
+
+$(document).ready(function () {
+  $(".createButton").click(function () {
+    $("body").hide();
+  });
+  $(".nextSetButton").click(function () {
+    $("body").show();
+  });
+});
