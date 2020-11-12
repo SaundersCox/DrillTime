@@ -106,7 +106,9 @@
 let performerData = {};
 
 $("document").ready(function () {
-
+  // Sets the curSet and numSets variables to be displayed
+  document.getElementById('setNum').textContent = curSet;
+  document.getElementById('setCount').textContent = numSets;
 
   $("#createButton").on("click", createPerformer);
   $("#nextSetButton").on("click", nextSet);
@@ -177,10 +179,16 @@ $("document").ready(function () {
 
 
   function nextSet() {
-
+    if (curSet < numSets) {
+      curSet++;
+      document.getElementById('setNum').textContent = curSet;
+    }
   }
   function prevSet() {
-
+    if (curSet > 0) {
+      curSet--;
+      document.getElementById('setNum').textContent = curSet;
+    }
   }
   function gotoSet() {
 
