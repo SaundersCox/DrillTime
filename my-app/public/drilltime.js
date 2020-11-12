@@ -1,104 +1,8 @@
-
-
-
-// function play(pid) {
-//   // TODO document.getElementById("button1").disabled = true
-//   var elem = document.getElementById(pid);
-//   var pos = 0;
-//   var id = setInterval(frame, 20);
-//   function frame() {
-//     if (pos == 350) {
-//       clearInterval(id);
-//     } else {
-//       pos++;
-//       elem.style.top = pos + "px";
-//       elem.style.left = pos + "px";
-//     }
-
-//   }
-//   setTimeout(function () { enableSubmit(that) }, 1000);
-// }
-
-// function myMove2() {
-//   var elem = document.getElementById("p1");
-//   var pos = 0;
-//   var id = setInterval(frame, 5);
-//   function frame() {
-//     if (pos == 350) {
-//       clearInterval(id);
-//     } else {
-//       pos++;
-//       elem.style.top = pos / 2 + "px";
-//       elem.style.left = pos * 2 + "px";
-//     }
-//   }
-// }
-
-
-// // Chung's Code
-// var num = 1;
-// var instr = "none";
-// var person = { number: num, x: 0, y: 0, instrument: instr };
-// var performers = [];
-
-// //Create new performer object.
-// function createP() {
-//   person = { number: num, x: 0, y: 0, instrument: instr };
-//   performers.push(person);
-//   num++;
-//   printOutput(); //Delete later
-// }
-
-// //Delete most recent performer.
-// function deleteP() {
-//   performers.pop(person);
-//   num--;
-//   printOutput(); //Delete later
-// }
-
-// //Clears all
-// function clearP() {
-//   performers = [];
-//   num = 1;
-//   printOutput(); //Delete later
-// }
-
-// //Set instrument to clarinet
-// function addClarinet() {
-//   instr = "clarinet";
-// }
-// //Set instrument to Trombone
-// function addTrombone() {
-//   instr = "trombone";
-// }
-
-// //Set most recently added performers instrument to inputted text.
-// function setInstrument() {
-//   var inst1 = document.getElementById("myText").value;
-//   //instr = inst1; //Delete later
-//   performers[performers.length - 1]["instrument"] = inst1;
-//   printOutput(); //Delete later
-// }
-
-// //Set x coordinate
-// function setX(xval) {
-//   performers[performers.length - 1]["x"] = xval;
-// }
-
-// //Set y coordinate
-// function setY(yval) {
-//   performers[performers.length - 1]["y"] = yval;
-// }
-
-// //Print output. Delete later.
-// function printOutput() {
-//   var data = "";
-//   for (let i = 0; i < performers.length; i++) {
-//     data += " " + performers[i]["number"] + " " + performers[i]["instrument"] + ", ";
-//   }
-//   document.getElementById("demo").innerHTML = data;
-// }
-
+let tips = [
+  "Tip: Use the 'create' button to load the performers in your marching drill!",
+  "there's a tip",
+  "another tip"
+];
 
 // Saunders' Code
 
@@ -106,8 +10,25 @@
 let performerData = {};
 
 $("document").ready(function () {
+
+  let rand = Math.floor(Math.random() * tips.length);
+
+  $("#nextTipButton").on("click", nextTip);
+
+  function randomizeTip() {
+    rand = Math.floor(Math.random() * tips.length);
+    $("#tipDisplay").text(tips[rand]);
+  }
+
+  function nextTip() {
+    rand = (rand + 1) % tips.length;
+    $("#tipDisplay").text(tips[rand]);
+  }
+  randomizeTip();
+
+
   // Sets the curSet and numSets variables to be displayed
-  document.getElementById('setNum').textContent = curSet;
+  document.getElementById('setNum').textContent = curSet + 1 ;
   document.getElementById('setCount').textContent = numSets;
 
   $("#createButton").on("click", createPerformer);
@@ -131,25 +52,33 @@ $("document").ready(function () {
 
     console.log("Create");
 
-    $(".container").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
+    $("#innerEditor").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
+
+    performerData[pNum] = {
+      id: pNum,
+      name: "",
+      inst: "",
+      sets: [
+        {
+          x: curX,
+          y: curY
+        }
+      ]
+    }
 
     $("#p-" + pNum).draggable(
       {
         opacity: 0.7,                   // Dim the performer when dragging
         cursorAt: { top: 0, left: 0 },//Default
-        appendTo: '#container',
-        containment: '#container',
+        appendTo: '#innerEditor',
+        containment: '#innerEditor',
         scroll: true,
         // When releasing the performer, we want to record their location
         stop: function () {
           console.log(pNum)
           console.log(curSet);
-          // If not on the field, snap performer back to previous location TODO
-          if (curX < 0 || curX > 900 || curY < 0 || curY > 500) {
-
-          }
           // If the performer's data has been initialized
-          else if (typeof (performerData[pNum]) != "undefined") {
+          if (typeof (performerData[pNum]) != "undefined") {
             performerData[pNum] = {
               id: pNum,
               name: "",
@@ -171,6 +100,18 @@ $("document").ready(function () {
         drag: function (e, ui) {
           curX = ui.position.left;
           curY = ui.position.top;
+          $("#xPos").text(curX);
+          $("#yPos").text(curY);
+
+          // Future functionality
+
+          // if (e.ctrlKey) {
+          //   curX = curX - curX % 5
+          // }
+          // if (e.altKey) {
+
+          // }
+
         },
       }
     );
@@ -179,15 +120,16 @@ $("document").ready(function () {
 
 
   function nextSet() {
-    if (curSet < numSets) {
+    if (curSet < numSets - 1) {
       curSet++;
-      document.getElementById('setNum').textContent = curSet;
+      document.getElementById('setNum').textContent = curSet + 1;
+      // $("#setNum").text(curSet);
     }
   }
   function prevSet() {
     if (curSet > 0) {
       curSet--;
-      document.getElementById('setNum').textContent = curSet;
+      document.getElementById('setNum').textContent = curSet + 1;
     }
   }
   function gotoSet() {
@@ -199,8 +141,8 @@ $("document").ready(function () {
       window.alert("The set number you entered does not exist!");
     }
     else {
-      curSet = set;
-      document.getElementById('setNum').textContent = curSet;
+      curSet = set - 1;
+      document.getElementById('setNum').textContent = curSet + 1;
       redraw();
     }
   }
@@ -211,6 +153,7 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
+<<<<<<< HEAD
     var name = prompt("What would you like to call your drill file", "drill");
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
     var downloadAnchorNode = document.createElement('a');
@@ -219,11 +162,36 @@ $("document").ready(function () {
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+=======
+    if (Object.keys(performerData).length == 0) {
+      alert("No performer data has been recorded");
+    }
+    else {
+      console.log(JSON.stringify(performerData));
+    }
+
+>>>>>>> b4c388cbd2cc12e840826cf1ab413b388777c3ff
   }
   function loadDrill() {
   }
   function clearDrill() {
+    $("#innerEditor").text("");
+    $("#setNum").text("1");
+    $("#setCount").text("1");
+    performerData = {};
+    numPerformers = 0;
+    curSet = 1;
+    numSets = 1;
+  }
 
+  // Redraw should be called when:
+  // - a set is changed (next set, prev set, goto set)
+  // - a drill is loaded
+  function redraw() {
+    // First wipe all HTML from the drill editor pane
+
+    // Reference performerData for the current set
+    // Build all
   }
 
 })

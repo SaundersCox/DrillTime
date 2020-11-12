@@ -66,12 +66,13 @@
   }
 
   /* Drill Editor */
-  .container {
+  .container {}
+
+  #innerEditor {
     width: 900px;
     height: 500px;
     position: relative;
     background: rgb(255, 255, 255);
-
   }
 
   #outerEditor {
@@ -131,43 +132,43 @@
           <p>Next Set</p>
         </a>
       </div>
-      <div onclick="prevSet()" id=prevSetButton>
+      <div id=prevSetButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-chevron-left w3-xxlarge"></em>
           <p>Prev Set</p>
         </a>
       </div>
-      <div onclick="gotoSet()" id=gotoSetButton>
+      <div id=gotoSetButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-hashtag w3-xxlarge"></em>
           <p>Goto Set</p>
         </a>
       </div>
-      <div onclick="playDrill()" id=playButton>
+      <div id=playButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-play w3-xxlarge"></em>
           <p>Play</p>
         </a>
       </div>
-      <div onclick="stopDrill()" id=stopButton>
+      <div id=stopButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-stop w3-xxlarge"></em>
           <p>Stop</p>
         </a>
       </div>
-      <div onclick="saveDrill()" id=saveButton>
+      <div id=saveButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-download w3-xxlarge"></em>
           <p>Save</p>
         </a>
       </div>
-      <div onclick="loadDrill()" id=loadButton>
+      <div id=loadButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-upload w3-xxlarge"></em>
           <p>Load</p>
         </a>
       </div>
-      <div onclick="clearDrill()" id=clearButton>
+      <div id=clearButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-times-circle w3-xxlarge"></em>
           <p>Clear</p>
@@ -203,51 +204,36 @@
     <!-- Drill Editor Section -->
     <div class="w3-text-black " id="about">
       <h2 class="w3-text-black">
-        Drill Editor  &nbsp;|&nbsp;  Set:
+        Drill Editor &nbsp;|&nbsp; Set:
         <span id="setNum"></span> / <span id="setCount"></span>
       </h2>
       <hr style="width:200px" class="w3-opacity">
-      <p>Tip: Use the "create" button to load the performers in your marching drill!
-      </p>
-      <p>Tip: The starting set of a Drill will start at Set 1</p>
 
+      <div id="tipSection">
+        <span id="tipDisplay"></span>
+        <button id="nextTipButton">Next Tip</button>
+      </div>
 
       <!-- Drill Editor Panel-->
       <div id="outerEditor" class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+
         <div class="w3-threequarter w3-section">
           <div id="innerEditor" class="container">
           </div>
         </div>
-        <!-- End Drill Editor Panel -->
 
-        <!-- Performer Editor -->
-        <!-- <div class="w3-quarter w3-section">
-          <span class="w3-xlarge">Performer Editor</span><br>
-          <form action="" method="get">
-            <label for="fname">Instrument:</label>
-            <input type="text" id="fname" name="fname"><br><br>
-            <input type="submit" value="Submit">
-            <button id="delete" type="button">Delete</button> -->
 
-        <!-- Data Structure Testing -->
-        <!-- <br><br><br>
-            <div>Select instrument</div>
-            <button onclick="addClarinet()">Clarinet</button>
-            <button onclick="addTrombone()">Trombone</button>
-            <p></p>
-            <div>Drill Editor</div>
-            <button onclick="createP()">Add</button>
-            <button onclick="deleteP()">Delete</button>
-            <button onclick="clearP()">Clear</button>
-            <p></p>
-            <div>Set most recent performers instrument</div>
-            <input type="text" id="myText" placeholder="input instrument...">
-            <button onclick="setInstrument()">Submit</button>
-            <p id="demo"></p> -->
-        <!-- End Data Structure Testing-->
-        </form>
+
       </div>
+
+      <div id="position" class="">
+        X: [<span id="xPos">0</span>]
+        Y: [<span id="yPos">0</span>]
+      </div>
+
     </div>
+
+
   </div>
   <!-- End Drill Editor Panel -->
 
