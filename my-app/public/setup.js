@@ -10,9 +10,7 @@ var curSet = 0
 var numSets = 2;
 // Instruments: Trumpet, Trombone, Tuba, Clarinet, Alto Sex, Tenor Sax, Piccolo, Snare, Bass, Cymbal
 
-// Sets the curSet and numSets variables to be displayed
-document.getElementById('setNum').textContent = curSet;
-document.getElementById('setCount').textContent = numSets;
+
 
 // Map of performer name to ID
 var performerMapSample = {};

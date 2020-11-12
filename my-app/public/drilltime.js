@@ -199,7 +199,18 @@ $("document").ready(function () {
     }
   }
   function gotoSet() {
-
+    var set = prompt("Please enter the set number you'd like to navigate to:", "Set Num");
+    if (set == null) {
+      return;
+    }
+    else if (set > numSets || set < 0) {
+      window.alert("The set number you entered does not exist!");
+    }
+    else {
+      curSet = set;
+      document.getElementById('setNum').textContent = curSet;
+      redraw();
+    }
   }
   function playDrill() {
 
