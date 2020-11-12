@@ -185,7 +185,7 @@ $("document").ready(function () {
     }
   }
   function prevSet() {
-    if (curSet > 0) {
+    if (curSet > 1) {
       curSet--;
       document.getElementById('setNum').textContent = curSet;
     }
@@ -195,7 +195,7 @@ $("document").ready(function () {
     if (set == null) {
       return;
     }
-    else if (set > numSets || set < 0) {
+    else if (set > numSets || set < 1) {
       window.alert("The set number you entered does not exist!");
     }
     else {
