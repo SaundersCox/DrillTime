@@ -1,103 +1,3 @@
-
-
-
-// function play(pid) {
-//   // TODO document.getElementById("button1").disabled = true
-//   var elem = document.getElementById(pid);
-//   var pos = 0;
-//   var id = setInterval(frame, 20);
-//   function frame() {
-//     if (pos == 350) {
-//       clearInterval(id);
-//     } else {
-//       pos++;
-//       elem.style.top = pos + "px";
-//       elem.style.left = pos + "px";
-//     }
-
-//   }
-//   setTimeout(function () { enableSubmit(that) }, 1000);
-// }
-
-// function myMove2() {
-//   var elem = document.getElementById("p1");
-//   var pos = 0;
-//   var id = setInterval(frame, 5);
-//   function frame() {
-//     if (pos == 350) {
-//       clearInterval(id);
-//     } else {
-//       pos++;
-//       elem.style.top = pos / 2 + "px";
-//       elem.style.left = pos * 2 + "px";
-//     }
-//   }
-// }
-
-
-// // Chung's Code
-// var num = 1;
-// var instr = "none";
-// var person = { number: num, x: 0, y: 0, instrument: instr };
-// var performers = [];
-
-// //Create new performer object.
-// function createP() {
-//   person = { number: num, x: 0, y: 0, instrument: instr };
-//   performers.push(person);
-//   num++;
-//   printOutput(); //Delete later
-// }
-
-// //Delete most recent performer.
-// function deleteP() {
-//   performers.pop(person);
-//   num--;
-//   printOutput(); //Delete later
-// }
-
-// //Clears all
-// function clearP() {
-//   performers = [];
-//   num = 1;
-//   printOutput(); //Delete later
-// }
-
-// //Set instrument to clarinet
-// function addClarinet() {
-//   instr = "clarinet";
-// }
-// //Set instrument to Trombone
-// function addTrombone() {
-//   instr = "trombone";
-// }
-
-// //Set most recently added performers instrument to inputted text.
-// function setInstrument() {
-//   var inst1 = document.getElementById("myText").value;
-//   //instr = inst1; //Delete later
-//   performers[performers.length - 1]["instrument"] = inst1;
-//   printOutput(); //Delete later
-// }
-
-// //Set x coordinate
-// function setX(xval) {
-//   performers[performers.length - 1]["x"] = xval;
-// }
-
-// //Set y coordinate
-// function setY(yval) {
-//   performers[performers.length - 1]["y"] = yval;
-// }
-
-// //Print output. Delete later.
-// function printOutput() {
-//   var data = "";
-//   for (let i = 0; i < performers.length; i++) {
-//     data += " " + performers[i]["number"] + " " + performers[i]["instrument"] + ", ";
-//   }
-//   document.getElementById("demo").innerHTML = data;
-// }
 let tips = [
   "Tip: Use the 'create' button to load the performers in your marching drill!",
   "there's a tip",
@@ -110,16 +10,25 @@ let tips = [
 let performerData = {};
 
 $("document").ready(function () {
-  
+
+  let rand = Math.floor(Math.random() * tips.length);
+
+  $("#nextTipButton").on("click", nextTip);
+
   function randomizeTip() {
-    let rand = Math.floor(Math.random() * tips.length);
+    rand = Math.floor(Math.random() * tips.length);
+    $("#tipDisplay").text(tips[rand]);
+  }
+
+  function nextTip() {
+    rand = (rand + 1) % tips.length;
     $("#tipDisplay").text(tips[rand]);
   }
   randomizeTip();
 
 
   // Sets the curSet and numSets variables to be displayed
-  document.getElementById('setNum').textContent = curSet;
+  document.getElementById('setNum').textContent = curSet + 1 ;
   document.getElementById('setCount').textContent = numSets;
 
   $("#createButton").on("click", createPerformer);
@@ -194,14 +103,14 @@ $("document").ready(function () {
           $("#xPos").text(curX);
           $("#yPos").text(curY);
 
+          // Future functionality
 
-          if (e.ctrlKey) {
-            curX = curX - curX % 5
-          }
-          if (e.altKey) {
+          // if (e.ctrlKey) {
+          //   curX = curX - curX % 5
+          // }
+          // if (e.altKey) {
 
-          }
-
+          // }
 
         },
       }
@@ -211,15 +120,16 @@ $("document").ready(function () {
 
 
   function nextSet() {
-    if (curSet < numSets) {
+    if (curSet < numSets - 1) {
       curSet++;
-      document.getElementById('setNum').textContent = curSet;
+      document.getElementById('setNum').textContent = curSet + 1;
+      // $("#setNum").text(curSet);
     }
   }
   function prevSet() {
     if (curSet > 0) {
       curSet--;
-      document.getElementById('setNum').textContent = curSet;
+      document.getElementById('setNum').textContent = curSet + 1;
     }
   }
   function gotoSet() {
@@ -227,12 +137,12 @@ $("document").ready(function () {
     if (set == null) {
       return;
     }
-    else if (set > numSets || set < 0) {
+    else if (set > numSets || set < 1) {
       window.alert("The set number you entered does not exist!");
     }
     else {
-      curSet = set;
-      document.getElementById('setNum').textContent = curSet;
+      curSet = set - 1;
+      document.getElementById('setNum').textContent = curSet + 1;
       redraw();
     }
   }
@@ -243,11 +153,11 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-    if (performerData == null) {
+    if (Object.keys(performerData).length == 0) {
       alert("No performer data has been recorded");
     }
     else {
-      console.log(performerData);
+      console.log(JSON.stringify(performerData));
     }
 
   }
@@ -255,7 +165,13 @@ $("document").ready(function () {
 
   }
   function clearDrill() {
-    performerData = null;
+    $("#innerEditor").text("");
+    $("#setNum").text("1");
+    $("#setCount").text("1");
+    performerData = {};
+    numPerformers = 0;
+    curSet = 1;
+    numSets = 1;
   }
 
   // Redraw should be called when:
@@ -263,6 +179,7 @@ $("document").ready(function () {
   // - a drill is loaded
   function redraw() {
     // First wipe all HTML from the drill editor pane
+
     // Reference performerData for the current set
     // Build all
   }
