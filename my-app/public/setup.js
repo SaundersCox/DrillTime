@@ -1,16 +1,21 @@
 
+var drill = {
+  credit: "The Dev Team",
+  name: "Test"
+};
+
 // Initial variables
-var numPerformers = 10;
-var curSet = 1
+var numPerformers = 0;
+var curSet = 0
 var numSets = 2;
 // Instruments: Trumpet, Trombone, Tuba, Clarinet, Alto Sex, Tenor Sax, Piccolo, Snare, Bass, Cymbal
 
 // Map of performer name to ID
-var performerMap = {};
-performerMap["Alice"] = 0;
+var performerMapSample = {};
+performerMapSample["Alice"] = 0;
 
 // All performer info
-var performers = [
+var performersSample = [
   {
     id: 0,
     name: "Alice",

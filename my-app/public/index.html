@@ -10,14 +10,16 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <title>DrillTime</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="setup.js"></script>
   <script src="drilltime.js"></script>
-  
-  
+
+
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,7 +45,7 @@
   .w3-sidebar {
     position: relative;
     width: 120px;
-    background: #684;
+    background: #8bc34a;
     overflow-y: hidden;
   }
 
@@ -66,9 +68,15 @@
   /* Drill Editor */
   .container {
     width: 900px;
-    height: 400px;
+    height: 500px;
     position: relative;
     background: rgb(255, 255, 255);
+
+  }
+
+  #outerEditor {
+    overflow: scroll;
+    padding-left: 50px;
   }
 
   .animate {
@@ -76,8 +84,9 @@
     height: 2em;
     border-radius: 50%;
     position: absolute;
-    background-color: rgb(107, 0, 0);
+    background-color: rgb(255, 255, 255);
     border: 3px solid #f36d00;
+    color: rgb(109, 0, 0);
   }
 
   .inst {
@@ -99,7 +108,7 @@
 </style>
 
 
-<body onload="load(); load2()" class="w3-light-green">
+<body class="w3-light-green">
   <!-- <nav class="rightbar w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
       <em class="fa fa-mouse-pointer w3-xxlarge"></em>
@@ -110,72 +119,75 @@
   <!-- Buttons -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <div class="navbar">
-      <button onclick="createPerformer()" id=createButton>
+      <div id=createButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-          <em class="fa fa-plus w3-xxlarge"></em>
+          <div class="fa fa-plus w3-xxlarge"></div>
           <p>Create</p>
         </a>
-      </button>
-      <button onclick="nextSet()" id=nextSetButton>
+      </div>
+      <div id=nextSetButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-chevron-right w3-xxlarge"></em>
           <p>Next Set</p>
         </a>
-      </button>
-      <button onclick="prevSet()" id=prevSetButton>
+      </div>
+      <div onclick="prevSet()" id=prevSetButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-chevron-left w3-xxlarge"></em>
           <p>Prev Set</p>
         </a>
-      </button>
-      <button onclick="gotoSet()" id=gotoSetButton>
+      </div>
+      <div onclick="gotoSet()" id=gotoSetButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-hashtag w3-xxlarge"></em>
           <p>Goto Set</p>
         </a>
-      </button>
-      <button onclick="playDrill()" id=playButton>
+      </div>
+      <div onclick="playDrill()" id=playButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-play w3-xxlarge"></em>
           <p>Play</p>
         </a>
-      </button>
-      <button onclick="stopDrill()" id=stopButton>
+      </div>
+      <div onclick="stopDrill()" id=stopButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-stop w3-xxlarge"></em>
           <p>Stop</p>
         </a>
-      </button>
-      <button onclick="saveDrill()" id=saveButton>
+      </div>
+      <div onclick="saveDrill()" id=saveButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-download w3-xxlarge"></em>
           <p>Save</p>
         </a>
-      </button>
-      <button onclick="loadDrill()" id=loadButton>
+      </div>
+      <div onclick="loadDrill()" id=loadButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-upload w3-xxlarge"></em>
           <p>Load</p>
         </a>
-      </button>
-      <button onclick="clearDrill()" id=clearButton>
+      </div>
+      <div onclick="clearDrill()" id=clearButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-times-circle w3-xxlarge"></em>
           <p>Clear</p>
         </a>
-      </button>
+      </div>
     </div>
   </nav>
 
   <!-- Navbar on small screens (Hidden on medium and large screens) -->
   <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
     <div class="w3-bar w3-grey w3-opacity w3-hover-opacity-off w3-center w3-small">
-      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
-      <p><button onclick="myMove(this); myMove2()" id=button1>Click Me</button></p>
-      <p><button onclick="myMove2()">Then Click Me</button></p>
+      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">CREATE</a>
+      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">NEXT</a>
+      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PREV</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">GOTO</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">PLAY</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">STOP</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">SAVE</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">LOAD</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CLEAR</a>
     </div>
 
     <!-- Bottom navbar -->
@@ -188,60 +200,36 @@
   <div class="w3-padding-large" id="main">
 
 
-    <!-- Header/Home -->
-    <!-- <header class="w3-container w3-padding-32 w3-center w3-light-green" id="home">
-
-      <h1 class="w3-jumbo w3-white">
-
-        <span class="w3-hide-small">DrillTime</span>
-
-      </h1>
-
-    </header> -->
-
     <!-- Drill Editor Section -->
-    <div class="w3-text-grey " id="about">
-      <h2 class="w3-text-light-grey">Drill Editor</h2>
+    <div class="w3-text-black " id="about">
+      <h2 class="w3-text-black">
+        Drill Editor  &nbsp;|&nbsp;  Set:
+        <span id="setNum">0</span> / <span id="setCount">0</span>
+      </h2>
       <hr style="width:200px" class="w3-opacity">
       <p>Tip: Use the "create" button to load the performers in your marching drill!
       </p>
 
 
       <!-- Drill Editor Panel-->
-      <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div id="outerEditor" class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
         <div class="w3-threequarter w3-section">
-          <span class="w3-xlarge">Field Editor</span><br>
-          <div class="container">
-            <div id="p0" class="animate">
-              <div class="inst">
-                <div class="inst-text">
-                  T1
-                </div>
-              </div>
-            </div>
-            <div id="p1" class="animate">
-              <div class="inst">
-                <div class="inst-text">
-                  T2
-                </div>
-              </div>
-            </div>
-            
+          <div id="innerEditor" class="container">
           </div>
         </div>
         <!-- End Drill Editor Panel -->
 
         <!-- Performer Editor -->
-        <div class="w3-quarter w3-section">
+        <!-- <div class="w3-quarter w3-section">
           <span class="w3-xlarge">Performer Editor</span><br>
           <form action="" method="get">
             <label for="fname">Instrument:</label>
             <input type="text" id="fname" name="fname"><br><br>
             <input type="submit" value="Submit">
-            <button id="delete" type="button">Delete</button>
+            <button id="delete" type="button">Delete</button> -->
 
-            <!-- Data Structure Testing -->
-            <br><br><br>
+        <!-- Data Structure Testing -->
+        <!-- <br><br><br>
             <div>Select instrument</div>
             <button onclick="addClarinet()">Clarinet</button>
             <button onclick="addTrombone()">Trombone</button>
@@ -254,18 +242,18 @@
             <div>Set most recent performers instrument</div>
             <input type="text" id="myText" placeholder="input instrument...">
             <button onclick="setInstrument()">Submit</button>
-            <p id="demo"></p>
-            <!-- End Data Structure Testing-->
-          </form>
-        </div>
+            <p id="demo"></p> -->
+        <!-- End Data Structure Testing-->
+        </form>
       </div>
     </div>
-    <!-- End Drill Editor Panel -->
+  </div>
+  <!-- End Drill Editor Panel -->
 
 
 
-    <!-- Stats Section -->
-    <!-- <h3 class="w3-padding-16 w3-text-light-grey">Stats</h3>
+  <!-- Stats Section -->
+  <!-- <h3 class="w3-padding-16 w3-text-light-grey">Stats</h3>
     <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
       <div class="w3-quarter w3-section">
         <span class="w3-xlarge">20</span><br>
@@ -284,9 +272,9 @@
         Notes
       </div>
     </div> -->
-    <!-- End Stats Section -->
+  <!-- End Stats Section -->
 
-    <!-- End Drill Editor Section -->
+  <!-- End Drill Editor Section -->
   </div>
 
   <!-- Our Aspirations Section -->
