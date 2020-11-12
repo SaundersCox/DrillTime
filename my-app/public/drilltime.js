@@ -153,22 +153,6 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-<<<<<<< HEAD
-    // var name = prompt("What would you like to call your drill file", "drill");
-    // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
-    // var downloadAnchorNode = document.createElement('a');
-    // downloadAnchorNode.setAttribute("href",     dataStr);
-    // downloadAnchorNode.setAttribute("download", name + ".json");
-    // document.body.appendChild(downloadAnchorNode);
-    // downloadAnchorNode.click();
-    // downloadAnchorNode.remove();
-    // if (Object.keys(performerData).length == 0) {
-    //   alert("No performer data has been recorded");
-    // }
-    // else {
-    //   console.log(JSON.stringify(performerData));
-    // }
-=======
     // Deanna's Code
     var name = prompt("What would you like to call your drill file", "drill");
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
@@ -186,7 +170,6 @@ $("document").ready(function () {
     else {
       console.log(JSON.stringify(performerData));
     }
->>>>>>> 16518de875259e47b3b9bdf11dd50c2a510638dc
 
   }
   function loadDrill() {
