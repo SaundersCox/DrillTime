@@ -131,25 +131,33 @@ $("document").ready(function () {
 
     console.log("Create");
 
-    $(".container").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
+    $("#innerEditor").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
+
+    performerData[pNum] = {
+      id: pNum,
+      name: "",
+      inst: "",
+      sets: [
+        {
+          x: curX,
+          y: curY
+        }
+      ]
+    }
 
     $("#p-" + pNum).draggable(
       {
         opacity: 0.7,                   // Dim the performer when dragging
         cursorAt: { top: 0, left: 0 },//Default
-        appendTo: '#container',
-        containment: '#container',
+        appendTo: '#innerEditor',
+        containment: '#innerEditor',
         scroll: true,
         // When releasing the performer, we want to record their location
         stop: function () {
           console.log(pNum)
           console.log(curSet);
-          // If not on the field, snap performer back to previous location TODO
-          if (curX < 0 || curX > 900 || curY < 0 || curY > 500) {
-
-          }
           // If the performer's data has been initialized
-          else if (typeof (performerData[pNum]) != "undefined") {
+          if (typeof (performerData[pNum]) != "undefined") {
             performerData[pNum] = {
               id: pNum,
               name: "",
@@ -200,13 +208,28 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
+    if (performerData == null) {
+      alert("No performer data has been recorded");
+    }
+    else {
+      console.log(performerData);
+    }
 
   }
   function loadDrill() {
 
   }
   function clearDrill() {
+    performerData = null;
+  }
 
+  // Redraw should be called when:
+  // - a set is changed (next set, prev set, goto set)
+  // - a drill is loaded
+  function redraw() {
+    // First wipe all HTML from the drill editor pane
+    // Reference performerData for the current set
+    // Build all
   }
 })
 
