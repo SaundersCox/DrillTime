@@ -113,12 +113,6 @@ $("document").ready(function () {
   $("#createButton").on("click", createPerformer);
   $("#nextSetButton").on("click", nextSet);
   $("#prevSetButton").on("click", prevSet);
-<<<<<<< HEAD
-
-  // Moving through sets
-  $("#")
-
-=======
   $("#playButton").on("click", playDrill);
   $("#stopButton").on("click", stopDrill);
   $("#saveButton").on("click", saveDrill);
@@ -126,7 +120,6 @@ $("document").ready(function () {
   $("#clearButton").on("click", clearDrill);
 
   // Creates one performer on the field. The performer can be dragged to any position on the field, and its position will be recorded for that set.
->>>>>>> 2cf78c1873236bee661fc27c0c5d894a8cf227af
   function createPerformer() {
     let pNum = numPerformers;
     performerData[pNum] = {
@@ -185,14 +178,10 @@ $("document").ready(function () {
 
 
   function nextSet() {
-<<<<<<< HEAD
     if (curSet < numSets) {
       curSet++;
       document.getElementById('setNum').textContent = curSet;
     }
-=======
-
->>>>>>> 2cf78c1873236bee661fc27c0c5d894a8cf227af
   }
   function prevSet() {
     if (curSet > 0) {
