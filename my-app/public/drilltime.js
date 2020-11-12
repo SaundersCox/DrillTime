@@ -110,7 +110,14 @@ $("document").ready(function () {
 
   $("#createButton").on("click", createPerformer);
   $("#nextSetButton").on("click", nextSet);
+  $("#prevSetButton").on("click", prevSet);
+  $("#playButton").on("click", playDrill);
+  $("#stopButton").on("click", stopDrill);
+  $("#saveButton").on("click", saveDrill);
+  $("#loadButton").on("click", loadDrill);
+  $("#clearButton").on("click", clearDrill);
 
+  // Creates one performer on the field. The performer can be dragged to any position on the field, and its position will be recorded for that set.
   function createPerformer() {
     let pNum = numPerformers;
     performerData[pNum] = {
@@ -125,18 +132,24 @@ $("document").ready(function () {
 
     $("#p-" + pNum).draggable(
       {
-        opacity: 0.7,
+        opacity: 0.7,                   // Dim the performer when dragging
         cursorAt: { top: 0, left: 0 },//Default
         appendTo: '#container',
         containment: '#container',
         scroll: true,
+        // When releasing the performer, we want to record their location
         stop: function () {
           console.log(pNum)
           console.log(curSet);
-          if (typeof (performerData[pNum]) != "undefined") {
+          // If not on the field, snap performer back to previous location TODO
+          if (curX < 0 || curX > 900 || curY < 0 || curY > 500) {
+
+          }
+          // If the performer's data has been initialized
+          else if (typeof (performerData[pNum]) != "undefined") {
             performerData[pNum] = {
               id: pNum,
-              name: "hi",
+              name: "",
               inst: "",
               sets: [
                 {
@@ -146,13 +159,13 @@ $("document").ready(function () {
               ]
             }
           }
+          // 
           else {
-            performerData[pNum].sets[curSet].sets.x = window.mouseXPos - $(this).draggable('option', 'cursorAt').left;
-            performerData[pNum].sets[curSet].sets.y = window.mouseYPos - $(this).draggable('option', 'cursorAt').top;
+            performerData[pNum].sets[curSet].sets.x = curX;
+            performerData[pNum].sets[curSet].sets.y = curY;
           }
         },
         drag: function (e, ui) {
-          console.log(ui.position.left);
           curX = ui.position.left;
           curY = ui.position.top;
         },
@@ -160,8 +173,10 @@ $("document").ready(function () {
     );
     numPerformers += 1;
   }
+
+
   function nextSet() {
-    
+
   }
   function prevSet() {
 
@@ -184,11 +199,6 @@ $("document").ready(function () {
   function clearDrill() {
 
   }
-
-
-
-
-
 })
 
 
