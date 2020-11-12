@@ -133,8 +133,18 @@ $("document").ready(function () {
     }
   }
   function gotoSet() {
-    
-    
+    var set = prompt("Please enter the set number you'd like to navigate to:", "Set Num");
+    if (set == null) {
+      return;
+    }
+    else if (set > numSets || set < 0 || isNaN(set)) {
+      window.alert("The set number you entered does not exist!");
+    }
+    else {
+      curSet = set - 1;
+      document.getElementById('setNum').textContent = curSet + 1;
+      redraw();
+    }
   }
   function playDrill() {
 
@@ -143,6 +153,17 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
+    // Deanna's Code
+    var name = prompt("What would you like to call your drill file", "drill");
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", name + ".json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+    
+    // Saunders' Code
     if (Object.keys(performerData).length == 0) {
       alert("No performer data has been recorded");
     }
@@ -152,7 +173,6 @@ $("document").ready(function () {
 
   }
   function loadDrill() {
-
   }
   function clearDrill() {
     $("#innerEditor").text("");
