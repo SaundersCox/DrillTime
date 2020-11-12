@@ -28,7 +28,7 @@ $("document").ready(function () {
 
 
   // Sets the curSet and numSets variables to be displayed
-  document.getElementById('setNum').textContent = curSet + 1 ;
+  document.getElementById('setNum').textContent = curSet + 1;
   document.getElementById('setCount').textContent = numSets;
 
   $("#createButton").on("click", createPerformer);
@@ -153,24 +153,21 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-<<<<<<< HEAD
-    var name = prompt("What would you like to call your drill file", "drill");
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-    downloadAnchorNode.setAttribute("download", name + ".json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-=======
-    if (Object.keys(performerData).length == 0) {
-      alert("No performer data has been recorded");
-    }
-    else {
-      console.log(JSON.stringify(performerData));
-    }
+    // var name = prompt("What would you like to call your drill file", "drill");
+    // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
+    // var downloadAnchorNode = document.createElement('a');
+    // downloadAnchorNode.setAttribute("href",     dataStr);
+    // downloadAnchorNode.setAttribute("download", name + ".json");
+    // document.body.appendChild(downloadAnchorNode);
+    // downloadAnchorNode.click();
+    // downloadAnchorNode.remove();
+    // if (Object.keys(performerData).length == 0) {
+    //   alert("No performer data has been recorded");
+    // }
+    // else {
+    //   console.log(JSON.stringify(performerData));
+    // }
 
->>>>>>> b4c388cbd2cc12e840826cf1ab413b388777c3ff
   }
   function loadDrill() {
   }
