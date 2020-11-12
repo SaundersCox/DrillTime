@@ -211,10 +211,16 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-  
+    var name = prompt("What would you like to call your drill file", "drill");
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", name + ".json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
   }
   function loadDrill() {
-
   }
   function clearDrill() {
 
