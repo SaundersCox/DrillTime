@@ -98,7 +98,11 @@
 //   }
 //   document.getElementById("demo").innerHTML = data;
 // }
-
+let tips = [
+  "Tip: Use the 'create' button to load the performers in your marching drill!",
+  "there's a tip",
+  "another tip"
+];
 
 // Saunders' Code
 
@@ -106,6 +110,14 @@
 let performerData = {};
 
 $("document").ready(function () {
+  
+  function randomizeTip() {
+    let rand = Math.floor(Math.random() * tips.length);
+    $("#tipDisplay").text(tips[rand]);
+  }
+  randomizeTip();
+
+
   // Sets the curSet and numSets variables to be displayed
   document.getElementById('setNum').textContent = curSet;
   document.getElementById('setCount').textContent = numSets;
@@ -179,6 +191,18 @@ $("document").ready(function () {
         drag: function (e, ui) {
           curX = ui.position.left;
           curY = ui.position.top;
+          $("#xPos").text(curX);
+          $("#yPos").text(curY);
+
+
+          if (e.ctrlKey) {
+            curX = curX - curX % 5
+          }
+          if (e.altKey) {
+
+          }
+
+
         },
       }
     );
