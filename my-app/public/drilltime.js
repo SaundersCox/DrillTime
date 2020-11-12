@@ -195,7 +195,7 @@ $("document").ready(function () {
     if (set == null) {
       return;
     }
-    else if (set > numSets || set < 0 || !set.isInteger()) {
+    else if (set > numSets || set < 0 || isNaN(set)) {
       window.alert("The set number you entered does not exist!");
     }
     else {
