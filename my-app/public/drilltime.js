@@ -111,6 +111,7 @@ $("document").ready(function () {
   $("#createButton").on("click", createPerformer);
   $("#nextSetButton").on("click", nextSet);
   $("#prevSetButton").on("click", prevSet);
+  $("#gotoSetButton").on("click", gotoSet);
   $("#playButton").on("click", playDrill);
   $("#stopButton").on("click", stopDrill);
   $("#saveButton").on("click", saveDrill);
