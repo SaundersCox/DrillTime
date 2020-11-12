@@ -24,12 +24,12 @@ var performersSample = [
     inst: "Piccolo",
     sets: [
       {
-        x: 10,
+        x: 20,
         y: 20,
       }
       , {
-        x: 20,
-        y: 40
+        x: 15,
+        y: 15
       }
     ]
   },
@@ -39,12 +39,12 @@ var performersSample = [
     inst: "Clarinet",
     sets: [
       {
-        x: 10,
+        x: 30,
         y: 20,
       }
       , {
-        x: 20,
-        y: 40
+        x: 30,
+        y: 10
       }
     ]
   },
@@ -54,12 +54,12 @@ var performersSample = [
     inst: "Alto Sax",
     sets: [
       {
-        x: 10,
+        x: 40,
         y: 20,
       }
       , {
-        x: 20,
-        y: 40
+        x: 45,
+        y: 15
       }
     ]
   },
@@ -69,12 +69,12 @@ var performersSample = [
     inst: "Tenor Sax",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 20,
+        y: 30,
       }
       , {
-        x: 20,
-        y: 40
+        x: 10,
+        y: 30
       }
     ]
   },
@@ -84,12 +84,12 @@ var performersSample = [
     inst: "Trumpet",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 30,
+        y: 30,
       }
       , {
-        x: 20,
-        y: 40
+        x: 30,
+        y: 30
       }
     ]
   },
@@ -99,12 +99,12 @@ var performersSample = [
     inst: "Trombone",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 40,
+        y: 30,
       }
       , {
-        x: 20,
-        y: 40
+        x: 50,
+        y: 30
       }
     ]
   },
@@ -114,12 +114,12 @@ var performersSample = [
     inst: "Tuba",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 20,
+        y: 40,
       }
       , {
-        x: 20,
-        y: 40
+        x: 15,
+        y: 45
       }
     ]
   },
@@ -129,12 +129,12 @@ var performersSample = [
     inst: "Bass Drum",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 30,
+        y: 40,
       }
       , {
-        x: 20,
-        y: 40
+        x: 30,
+        y: 50
       }
     ]
   },
@@ -144,12 +144,12 @@ var performersSample = [
     inst: "Snare",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 40,
+        y: 40,
       }
       , {
-        x: 20,
-        y: 40
+        x: 45,
+        y: 45
       }
     ]
   },
@@ -159,12 +159,12 @@ var performersSample = [
     inst: "Cymbal",
     sets: [
       {
-        x: 10,
-        y: 20,
+        x: 30,
+        y: 50,
       }
       , {
-        x: 20,
-        y: 40
+        x: 30,
+        y: 60
       }
     ]
   }

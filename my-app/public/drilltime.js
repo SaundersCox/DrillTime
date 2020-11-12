@@ -211,7 +211,10 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-
+    exportData = 'data:text/json;charset=utf-8,';
+    exportData += escape(JSON.stringify(performerData));
+    encodedUri = encodeURI(exportData);
+    newWindow = window.open(encodedUri);
   }
   function loadDrill() {
 
