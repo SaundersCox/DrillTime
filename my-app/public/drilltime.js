@@ -103,61 +103,95 @@
 // Saunders' Code
 
 // Initial load
-$("document").ready(function() {
-  // var newText = $("<p>")
-  // newText.append("<h1>Replacement</h1>")
-  // $("#createButton").html(newText);
+let performerData = {};
+
+$("document").ready(function () {
+
 
   $("#createButton").on("click", createPerformer);
-  // $("#createButton").on("mouseleave", whenMouseLeaves);
-  $("#p0").draggable();
-
+  $("#nextSetButton").on("click", nextSet);
 
   function createPerformer() {
+    let pNum = numPerformers;
+    performerData[pNum] = {
+      id: 0
+    }
+    let curX = 0;
+    let curY = 0;
+
     console.log("Create");
-    $(".container").append("<div id=\"p" + numPerformers + "\" class=\"animate\">" + numPerformers + "</div>")
-    $("#p" + numPerformers).draggable();
+
+    $(".container").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
+
+    $("#p-" + pNum).draggable(
+      {
+        opacity: 0.7,
+        cursorAt: { top: 0, left: 0 },//Default
+        appendTo: '#container',
+        containment: '#container',
+        scroll: true,
+        stop: function () {
+          console.log(pNum)
+          console.log(curSet);
+          if (typeof (performerData[pNum]) != "undefined") {
+            performerData[pNum] = {
+              id: pNum,
+              name: "hi",
+              inst: "",
+              sets: [
+                {
+                  x: curX,
+                  y: curY
+                }
+              ]
+            }
+          }
+          else {
+            performerData[pNum].sets[curSet].sets.x = window.mouseXPos - $(this).draggable('option', 'cursorAt').left;
+            performerData[pNum].sets[curSet].sets.y = window.mouseYPos - $(this).draggable('option', 'cursorAt').top;
+          }
+        },
+        drag: function (e, ui) {
+          console.log(ui.position.left);
+          curX = ui.position.left;
+          curY = ui.position.top;
+        },
+      }
+    );
     numPerformers += 1;
   }
+  function nextSet() {
+    
+  }
+  function prevSet() {
+
+  }
+  function gotoSet() {
+
+  }
+  function playDrill() {
+
+  }
+  function stopDrill() {
+
+  }
+  function saveDrill() {
+
+  }
+  function loadDrill() {
+
+  }
+  function clearDrill() {
+
+  }
+
+
+
+
+
 })
 
-function load() {
-  console.log("hello")
 
-}
 
-var pos = 0;
 
-function nextSet() {
 
-}
-function prevSet() {
-
-}
-function gotoSet() {
-
-}
-function playDrill() {
-
-}
-function stopDrill() {
-
-}
-function saveDrill() {
-
-}
-function loadDrill() {
-
-}
-function clearDrill() {
-
-}
-
-$(document).ready(function () {
-  $(".createButton").click(function () {
-    $("body").hide();
-  });
-  $(".nextSetButton").click(function () {
-    $("body").show();
-  });
-});

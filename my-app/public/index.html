@@ -68,9 +68,15 @@
   /* Drill Editor */
   .container {
     width: 900px;
-    height: 400px;
+    height: 500px;
     position: relative;
     background: rgb(255, 255, 255);
+
+  }
+
+  #outerEditor {
+    overflow: scroll;
+    padding-left: 50px;
   }
 
   .animate {
@@ -80,7 +86,7 @@
     position: absolute;
     background-color: rgb(255, 255, 255);
     border: 3px solid #f36d00;
-    color:rgb(109, 0, 0);
+    color: rgb(109, 0, 0);
   }
 
   .inst {
@@ -102,7 +108,7 @@
 </style>
 
 
-<body onload="load()" class="w3-light-green">
+<body class="w3-light-green">
   <!-- <nav class="rightbar w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
       <em class="fa fa-mouse-pointer w3-xxlarge"></em>
@@ -173,12 +179,15 @@
   <!-- Navbar on small screens (Hidden on medium and large screens) -->
   <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
     <div class="w3-bar w3-grey w3-opacity w3-hover-opacity-off w3-center w3-small">
-      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
-      <p><button onclick="myMove(this); myMove2()" id=button1>Click Me</button></p>
-      <p><button onclick="myMove2()">Then Click Me</button></p>
+      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">CREATE</a>
+      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">NEXT</a>
+      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PREV</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">GOTO</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">PLAY</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">STOP</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">SAVE</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">LOAD</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CLEAR</a>
     </div>
 
     <!-- Bottom navbar -->
@@ -191,30 +200,21 @@
   <div class="w3-padding-large" id="main">
 
 
-    <!-- Header/Home -->
-    <!-- <header class="w3-container w3-padding-32 w3-center w3-light-green" id="home">
-
-      <h1 class="w3-jumbo w3-white">
-
-        <span class="w3-hide-small">DrillTime</span>
-
-      </h1>
-
-    </header> -->
-
     <!-- Drill Editor Section -->
     <div class="w3-text-black " id="about">
-      <h2 class="w3-text-black">Drill Editor</h2>
+      <h2 class="w3-text-black">
+        Drill Editor  &nbsp;|&nbsp;  Set:
+        <span id="setNum">0</span> / <span id="setCount">0</span>
+      </h2>
       <hr style="width:200px" class="w3-opacity">
       <p>Tip: Use the "create" button to load the performers in your marching drill!
       </p>
 
 
       <!-- Drill Editor Panel-->
-      <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div id="outerEditor" class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
         <div class="w3-threequarter w3-section">
-          <span class="w3-xlarge">Field Editor</span><br>
-          <div class="container">
+          <div id="innerEditor" class="container">
           </div>
         </div>
         <!-- End Drill Editor Panel -->
