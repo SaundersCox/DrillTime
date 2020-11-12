@@ -28,7 +28,7 @@ $("document").ready(function () {
 
 
   // Sets the curSet and numSets variables to be displayed
-  document.getElementById('setNum').textContent = curSet + 1 ;
+  document.getElementById('setNum').textContent = curSet + 1;
   document.getElementById('setCount').textContent = numSets;
 
   $("#createButton").on("click", createPerformer);
@@ -133,18 +133,8 @@ $("document").ready(function () {
     }
   }
   function gotoSet() {
-    var set = prompt("Please enter the set number you'd like to navigate to:", "Set Num");
-    if (set == null) {
-      return;
-    }
-    else if (set > numSets || set < 0 || !set.isInteger()) {
-      window.alert("The set number you entered does not exist!");
-    }
-    else {
-      curSet = set - 1;
-      document.getElementById('setNum').textContent = curSet + 1;
-      redraw();
-    }
+    
+    
   }
   function playDrill() {
 
