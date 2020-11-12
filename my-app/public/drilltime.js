@@ -1,7 +1,11 @@
 let tips = [
-  "Tip: Use the 'create' button to load the performers in your marching drill!",
-  "there's a tip",
-  "another tip"
+  "Use the 'create' button to load the performers in your marching drill!",
+  "If you have symmetry in a set you don't need to conceptualize as many movements",
+  "You can see what set you are currently on at the top of the page",
+  "You can use the 'Next Set', 'Prev Set', and 'Goto Set' buttons to navigate between sets",
+  "Moving some performers around other stationary performers allows for them to focus on things like difficult musical sections",
+  "Radial symmetry in a set allows for more complex and polished looking sets that are easy to make",
+    
 ];
 
 // Saunders' Code
@@ -17,12 +21,12 @@ $("document").ready(function () {
 
   function randomizeTip() {
     rand = Math.floor(Math.random() * tips.length);
-    $("#tipDisplay").text(tips[rand]);
+    $("#tipDisplay").text("Tip: "+tips[rand]);
   }
 
   function nextTip() {
     rand = (rand + 1) % tips.length;
-    $("#tipDisplay").text(tips[rand]);
+    $("#tipDisplay").text("Tip: "+tips[rand]);
   }
   randomizeTip();
 
@@ -173,6 +177,21 @@ $("document").ready(function () {
 
   }
   function loadDrill() {
+    //Deanna's code
+    performerData = {"0":{"id":0,"name":"Alice","inst":"","sets":[{"x":150,"y":100}]},
+    "1":{"id":1,"name":"Tom","inst":"","sets":[{"x":250,"y":100}]},
+    "2":{"id":2,"name":"Brett","inst":"","sets":[{"x":350,"y":100}]},
+    "3":{"id":3,"name":"Matt","inst":"","sets":[{"x":150,"y":150}]},
+    "4":{"id":4,"name":"Finne","inst":"","sets":[{"x":250,"y":150}]},
+    "5":{"id":5,"name":"George","inst":"","sets":[{"x":350,"y":150}]},
+    "6":{"id":6,"name":"Colin","inst":"","sets":[{"x":150,"y":350}]},
+    "7":{"id":7,"name":"Max","inst":"","sets":[{"x":250,"y":350}]},
+    "8":{"id":8,"name":"Diona","inst":"","sets":[{"x":350,"y":350}]},
+    "9":{"id":9,"name":"Erik","inst":"","sets":[{"x":150,"y":400}]},
+    "10":{"id":10,"name":"Jim","inst":"","sets":[{"x":250,"y":400}]},
+    "11":{"id":11,"name":"Josh","inst":"","sets":[{"x":350,"y":400}]}}
+    redraw();
+
   }
   function clearDrill() {
     $("#innerEditor").text("");
@@ -188,6 +207,7 @@ $("document").ready(function () {
   // - a set is changed (next set, prev set, goto set)
   // - a drill is loaded
   function redraw() {
+
     // First wipe all HTML from the drill editor pane
 
     // Reference performerData for the current set
