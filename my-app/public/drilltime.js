@@ -185,7 +185,7 @@ $("document").ready(function () {
     }
   }
   function prevSet() {
-    if (curSet > 1) {
+    if (curSet > 0) {
       curSet--;
       document.getElementById('setNum').textContent = curSet;
     }
@@ -195,7 +195,7 @@ $("document").ready(function () {
     if (set == null) {
       return;
     }
-    else if (set > numSets || set < 1) {
+    else if (set > numSets || set < 0 || !set.isInteger()) {
       window.alert("The set number you entered does not exist!");
     }
     else {
@@ -211,10 +211,7 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-    exportData = 'data:text/json;charset=utf-8,';
-    exportData += escape(JSON.stringify(performerData));
-    encodedUri = encodeURI(exportData);
-    newWindow = window.open(encodedUri);
+  
   }
   function loadDrill() {
 
@@ -222,6 +219,7 @@ $("document").ready(function () {
   function clearDrill() {
 
   }
+
 })
 
 
