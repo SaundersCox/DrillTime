@@ -137,7 +137,7 @@ $("document").ready(function () {
     if (set == null) {
       return;
     }
-    else if (set > numSets || set < 1) {
+    else if (set > numSets || set < 0 || !set.isInteger()) {
       window.alert("The set number you entered does not exist!");
     }
     else {
@@ -183,6 +183,7 @@ $("document").ready(function () {
     // Reference performerData for the current set
     // Build all
   }
+
 })
 
 
