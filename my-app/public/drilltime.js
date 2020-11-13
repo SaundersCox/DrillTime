@@ -153,43 +153,51 @@ $("document").ready(function () {
 
   }
   function saveDrill() {
-<<<<<<< HEAD
+    // Deanna's Code
     // var name = prompt("What would you like to call your drill file", "drill");
     // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
     // var downloadAnchorNode = document.createElement('a');
-    // downloadAnchorNode.setAttribute("href",     dataStr);
+    // downloadAnchorNode.setAttribute("href", dataStr);
     // downloadAnchorNode.setAttribute("download", name + ".json");
     // document.body.appendChild(downloadAnchorNode);
     // downloadAnchorNode.click();
     // downloadAnchorNode.remove();
-    // if (Object.keys(performerData).length == 0) {
-    //   alert("No performer data has been recorded");
-    // }
-    // else {
-    //   console.log(JSON.stringify(performerData));
-    // }
-=======
-    // Deanna's Code
-    var name = prompt("What would you like to call your drill file", "drill");
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(performerData));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-    downloadAnchorNode.setAttribute("download", name + ".json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-    
+
     // Saunders' Code
     if (Object.keys(performerData).length == 0) {
       alert("No performer data has been recorded");
     }
     else {
-      console.log(JSON.stringify(performerData));
+      const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = JSON.stringify(performerData);
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      };
+      copyToClipboard();
+      alert("Copied performer data successfully");
     }
->>>>>>> 16518de875259e47b3b9bdf11dd50c2a510638dc
 
   }
   function loadDrill() {
+    try {
+      let loadThis = prompt("Please enter the saved JSON string.\nNote: This will erase your current drill!", "");
+      if (loadThis) {
+        clearDrill();
+        performerData = JSON.parse(loadThis);
+      }
+
+    }
+    catch (err) {
+      alert(err);
+      // alert("The JSON string was invalid");
+    }
+    redraw(0);
   }
   function clearDrill() {
     $("#innerEditor").text("");
@@ -204,10 +212,19 @@ $("document").ready(function () {
   // Redraw should be called when:
   // - a set is changed (next set, prev set, goto set)
   // - a drill is loaded
-  function redraw() {
-    // First wipe all HTML from the drill editor pane
-
+  function redraw(redrawnSet) {
+    // Clear should be called OUTSIDE OF REDRAW
     // Reference performerData for the current set
+    for (let id in performerData) {
+      let thisX = performerData[id].sets[redrawnSet].x;
+      let thisY = performerData[id].sets[redrawnSet].y;
+      createPerformer();
+
+      console.log(typeof(thisX));
+      $(".animate").last().css("left", parseInt(thisX));
+      $(".animate").last().css("top", parseInt(thisY));
+  
+    }
     // Build all
   }
 
