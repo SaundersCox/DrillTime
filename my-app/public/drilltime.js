@@ -45,14 +45,16 @@ $("document").ready(function () {
   $("#loadButton").on("click", loadDrill);
   $("#clearButton").on("click", clearDrill);
 
+  let curX = 0;
+  let curY = 0;
+
   // Creates one performer on the field. The performer can be dragged to any position on the field, and its position will be recorded for that set.
   function createPerformer() {
     let pNum = numPerformers;
     performerData[pNum] = {
       id: 0
     }
-    let curX = 0;
-    let curY = 0;
+
 
     console.log("Create");
 

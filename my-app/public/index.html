@@ -65,11 +65,8 @@
     }
   }
 
-  /* Drill Editor */
-  .container {}
-
   #innerEditor {
-    width: 900px;
+    width: 950px;
     height: 500px;
     position: relative;
     background: rgb(255, 255, 255);
@@ -78,6 +75,8 @@
   #outerEditor {
     overflow: scroll;
     padding-left: 18px;
+    width: 1000px;
+    height: 580px;
   }
 
   .animate {
@@ -110,38 +109,15 @@
 
 
 <body class="w3-light-green">
-  <!-- <nav class="rightbar w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-light-green">
-      <em class="fa fa-mouse-pointer w3-xxlarge"></em>
-      <p>Select</p>
-    </a>
-  </nav> -->
 
   <!-- Buttons -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <div class="navbar">
+      <div style="padding-top: 190px;"></div>
       <div id=createButton>
         <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
           <div class="fa fa-plus w3-xxlarge"></div>
-          <p>Create</p>
-        </a>
-      </div>
-      <div id=nextSetButton>
-        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-          <em class="fa fa-chevron-right w3-xxlarge"></em>
-          <p>Next Set</p>
-        </a>
-      </div>
-      <div id=prevSetButton>
-        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-          <em class="fa fa-chevron-left w3-xxlarge"></em>
-          <p>Prev Set</p>
-        </a>
-      </div>
-      <div id=gotoSetButton>
-        <a class="w3-bar-item w3-button w3-padding-large w3-light-green">
-          <em class="fa fa-hashtag w3-xxlarge"></em>
-          <p>Goto Set</p>
+          <p>Create Performer</p>
         </a>
       </div>
       <div id=playButton>
@@ -190,16 +166,10 @@
       <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">LOAD</a>
       <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CLEAR</a>
     </div>
-
-    <!-- Bottom navbar -->
-
   </div>
-
-
 
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
-
 
     <!-- Drill Editor Section -->
     <div class="w3-text-black " id="about">
@@ -207,12 +177,31 @@
         Drill Editor &nbsp;|&nbsp; Set:
         <span id="setNum"></span> / <span id="setCount"></span>
       </h2>
-      <hr style="width:200px" class="w3-opacity">
 
-      <div id="tipSection">
-        <div id="tipDisplay"></div>
-        <button id="nextTipButton">Next Tip</button>
-      </div>
+      <!-- Set navigation -->
+      <a id=createSetButton class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <em class="fa fa-plus w3-xxlarge"></em>
+        <p>Create Set</p>
+      </a>
+      <a id=deleteSetButton class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <em class="fa fa-minus w3-xxlarge"></em>
+        <p>Delete Set</p>
+      </a>
+      <a id=prevSetButton class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <em class="fa fa-chevron-left w3-xxlarge"></em>
+        <p>Prev Set</p>
+      </a>
+      <a id=nextSetButton class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <em class="fa fa-chevron-right w3-xxlarge"></em>
+        <p>Next Set</p>
+      </a>
+      <a id=gotoSetButton class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <em class="fa fa-hashtag w3-xxlarge"></em>
+        <p>Goto Set</p>
+      </a>
+
+
+
 
       <!-- Drill Editor Panel-->
       <div id="outerEditor" class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
@@ -222,81 +211,30 @@
           </div>
         </div>
 
-
-
       </div>
-
+      <!-- x/y dragging positions -->
       <div id="position" class="">
         X: [<span id="xPos">0</span>]
         Y: [<span id="yPos">0</span>]
       </div>
+      <!-- Invisible field used to store save/load text -->
       <div id="copyText" style="display: none;">
-        
+
+      </div>
+
+      <hr>
+
+      <!-- Tips -->
+      <div id="tipSection">
+        <div id="tipDisplay"></div>
+        <button id="nextTipButton">Next Tip</button>
       </div>
 
     </div>
 
 
   </div>
-  <!-- End Drill Editor Panel -->
 
-
-
-  <!-- Stats Section -->
-  <!-- <h3 class="w3-padding-16 w3-text-light-grey">Stats</h3>
-    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">20</span><br>
-        Performers
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">15</span><br>
-        Scenes
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">12</span><br>
-        Sections
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">45</span><br>
-        Notes
-      </div>
-    </div> -->
-  <!-- End Stats Section -->
-
-  <!-- End Drill Editor Section -->
-  </div>
-
-  <!-- Our Aspirations Section -->
-  <!-- <div class="w3-padding-64 w3-content" id="photos">
-    <h2 class="w3-text-light-grey">Our Aspirations</h2>
-    <hr style="width:200px" class="w3-opacity"> -->
-
-  <!-- Grid  -->
-  <!-- <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-col">
-        <ul class="w3-ul w3-row w3-center w3-padding-16 w3-section w3-light-grey">
-          <li>Facilitate and augment the process of creating marching drills</li>
-          <li>Digitize the process for ease of access</li>
-        </ul>
-      </div> -->
-  <!-- End  grid -->
-  <!-- </div> -->
-  <!-- End Aspirations Section -->
-  <!-- </div> -->
-
-  <!-- Contact Section -->
-  <!-- <div class="w3-padding-64 w3-content w3-text-white" id="contact">
-    <h2 class="w3-text-light-grey">Contact</h2>
-    <hr style="width:200px" class="w3-opacity">
-
-    <div class="w3-section">
-      <p><em class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></em> Virginia Tech</p>
-      <p><em class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </em> Email: drilltimeapp@gmail.com
-      </p>
-    </div><br> -->
-  <!-- End Contact Section -->
-  </div>
 
   <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
