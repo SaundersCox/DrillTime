@@ -125,9 +125,11 @@ $("document").ready(function () {
   }
   function playDrill() {
     // TODO
+    alert("Playback functionality is under development. Check back later.");
   }
   function stopDrill() {
     // TODO
+    alert("Playback functionality is under development. Check back later.");
   }
   function saveDrill() {
     // Deanna's Code
