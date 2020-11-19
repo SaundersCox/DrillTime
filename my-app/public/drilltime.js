@@ -5,7 +5,7 @@ let tips = [
   "You can use the 'Next Set', 'Prev Set', and 'Goto Set' buttons to navigate between sets",
   "Moving some performers around other stationary performers allows for them to focus on things like difficult musical sections",
   "Radial symmetry in a set allows for more complex and polished looking sets that are easy to make",
-
+  "If you are writing drill to music, take note of how many counts into the piece repeat signs, key changes, and double bars are"
 ];
 
 // Saunders' Code
