@@ -31,6 +31,12 @@ div.drill-editor-panel {
     width: 100%;
 }
 
-div.sidetoside {
-    display: inline;
+#sidetoside {
+    display: inline-flex;
+}
+
+#sampleLoadData {
+    text-align: center;
+    margin-left: 20px;
+    float: right;
 }
