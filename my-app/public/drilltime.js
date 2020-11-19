@@ -215,31 +215,42 @@ $("document").ready(function () {
     $("#innerEditor").text("");
   }
   // END PERFORMER FUNCTIONS
-
+  
   // SET FUNCTIONS
   function createSet() {
     const newSet = curSet + 1;
     for (const key of Object.keys(performerData)) {
-      performerData[key].sets[newSet] = Object.assign(performerData[key].sets[curSet]);
+      performerData[key].sets.splice(newSet, 0, Object.assign(performerData[key].sets[curSet]));
+      // performerData[key].sets[newSet] = Object.assign(performerData[key].sets[curSet]);
     }
     numSets++;
     curSet++;
     refreshSetDisplay();
-    nextSet();
+    // nextSet();
   }
   function deleteSet() {
     // Delete the set only if there exists more than 1 set
     if (numSets > 1) {
+      // Delete the set "curSet"
+      count = 0;
+      for (const key of Object.keys(performerData)) {
+        $("#p-" + count).remove();
+        performerData[key].sets.splice(curSet, 1);
+        count++;
+      }
+      
+      numSets--;
+
       // And assure we don't go below set 1
       if (curSet > 0) {
         curSet--;
       }
-      numSets--;
+      
 
       // Update the performers
-      for (let performer of Object.keys(performerData)) {
-        console.log(performer);
-      }
+      // for (let performer of Object.keys(performerData)) {
+      //   console.log(performer);
+      // }
 
       // Redraw the set
       redraw(curSet);
