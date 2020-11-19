@@ -30,3 +30,7 @@ div.drill-editor {
 div.drill-editor-panel {
     width: 100%;
 }
+
+div.sidetoside {
+    display: inline;
+}
