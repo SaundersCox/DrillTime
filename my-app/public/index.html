@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles.css">
+  
 </head>
 
 <style>
@@ -49,6 +50,8 @@
     overflow-y: hidden;
   }
 
+  html { overflow-y: scroll; }
+
   /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
   #main {
     margin-left: 120px
@@ -61,7 +64,7 @@
 
   @media only screen and (max-width: 600px) {
     #main {
-      margin-left: 0
+      margin-left: 0 
     }
   }
 
@@ -73,7 +76,7 @@
   }
 
   #outerEditor {
-    overflow: scroll;
+    overflow: hidden;
     padding-left: 18px;
     width: 1000px;
     height: 580px;
@@ -170,7 +173,7 @@
 
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
-
+    
     <!-- Drill Editor Section -->
     <div class="w3-text-black " id="about">
       <h2 class="w3-text-black">
