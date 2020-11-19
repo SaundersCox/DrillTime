@@ -1,11 +1,14 @@
 let tips = [
-  "Use the 'create' button to load the performers in your marching drill!",
+  "Use the 'Create Performer' button to load the performers in your marching drill!",
   "If you have symmetry in a set you don't need to conceptualize as many movements",
   "You can see what set you are currently on at the top of the page",
   "You can use the 'Next Set', 'Prev Set', and 'Goto Set' buttons to navigate between sets",
   "Moving some performers around other stationary performers allows for them to focus on things like difficult musical sections",
   "Radial symmetry in a set allows for more complex and polished looking sets that are easy to make",
-  "If you are writing drill to music, take note of how many counts into the piece repeat signs, key changes, and double bars are"
+  "If you are writing drill to music, take note of how many counts into the piece repeat signs, key changes, and double bars are",
+  "By having a small number of performers moving around other performers that switch periodically makes easy drill that looks complex",
+  "If you are writing drill to music, look at who has difficult parts; letting let them stay stationary makes it easier to play music",
+  "Below the tips are some sample drills you can load up and look at"
 ];
 
 // Saunders' Code
