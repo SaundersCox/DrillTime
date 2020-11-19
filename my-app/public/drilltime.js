@@ -12,11 +12,13 @@ let tips = [
 
 // Initial load
 let performerData = {};
+// PERFORMER FUNCTIONS
+
 
 $("document").ready(function () {
 
+  // HELPER FUNCTIONS 
   let rand = Math.floor(Math.random() * tips.length);
-
   $("#nextTipButton").on("click", nextTip);
 
   function randomizeTip() {
@@ -30,47 +32,50 @@ $("document").ready(function () {
   }
   randomizeTip();
 
+  function refreshSetDisplay() {
+    $("#setNum").text(curSet + 1);
+    $("#setCount").text(numSets);
+  }
 
   // Sets the curSet and numSets variables to be displayed
   document.getElementById('setNum').textContent = curSet + 1;
   document.getElementById('setCount').textContent = numSets;
 
+  // END HELPER FUNCTIONS 
+
+  // BUTTON ACTIONS
   $("#createButton").on("click", createPerformer);
-  $("#nextSetButton").on("click", nextSet);
-  $("#prevSetButton").on("click", prevSet);
-  $("#gotoSetButton").on("click", gotoSet);
   $("#playButton").on("click", playDrill);
   $("#stopButton").on("click", stopDrill);
   $("#saveButton").on("click", saveDrill);
   $("#loadButton").on("click", loadDrill);
   $("#clearButton").on("click", clearDrill);
 
+  $("#createSetButton").on("click", createSet);
+  $("#deleteSetButton").on("click", deleteSet);
+  $("#prevSetButton").on("click", prevSet);
+  $("#nextSetButton").on("click", nextSet);
+  $("#gotoSetButton").on("click", gotoSet);
+  // END BUTTON ACTIONS
+
   let curX = 0;
   let curY = 0;
+  let pNum = 0; // The counter for redrawing the performers
 
-  // Creates one performer on the field. The performer can be dragged to any position on the field, and its position will be recorded for that set.
-  function createPerformer() {
-    let pNum = numPerformers;
-    performerData[pNum] = {
-      id: 0
+  function drawPerformer(pNum, isNew) {
+    if (isNew) {
+      performerData[pNum] = {
+        id: pNum,
+        name: "",
+        inst: "",
+        sets: [{ x: 0, y: 0 }]
+      }
     }
-
 
     console.log("Create");
 
     $("#innerEditor").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
 
-    performerData[pNum] = {
-      id: pNum,
-      name: "",
-      inst: "",
-      sets: [
-        {
-          x: curX,
-          y: curY
-        }
-      ]
-    }
 
     $("#p-" + pNum).draggable(
       {
@@ -83,25 +88,14 @@ $("document").ready(function () {
         stop: function () {
           console.log(pNum)
           console.log(curSet);
-          // If the performer's data has been initialized
-          if (typeof (performerData[pNum]) != "undefined") {
-            performerData[pNum] = {
-              id: pNum,
-              name: "",
-              inst: "",
-              sets: [
-                {
-                  x: curX,
-                  y: curY
-                }
-              ]
-            }
-          }
-          // 
-          else {
-            performerData[pNum].sets[curSet].sets.x = curX;
-            performerData[pNum].sets[curSet].sets.y = curY;
-          }
+          // Case: current set is out of bounds
+
+          console.log("make the set");
+          console.log(pNum);
+          performerData[pNum].sets[curSet] = { x: curX, y: curY };
+
+
+          console.log(performerData[pNum].sets);
         },
         drag: function (e, ui) {
           curX = ui.position.left;
@@ -121,42 +115,19 @@ $("document").ready(function () {
         },
       }
     );
-    numPerformers += 1;
   }
+  // Creates one performer on the field. The performer can be dragged to any position on the field, and its position will be recorded for that set.
+  function createPerformer() {
 
+    drawPerformer(numPerformers, true);
+    numPerformers++;
 
-  function nextSet() {
-    if (curSet < numSets - 1) {
-      curSet++;
-      document.getElementById('setNum').textContent = curSet + 1;
-      // $("#setNum").text(curSet);
-    }
-  }
-  function prevSet() {
-    if (curSet > 0) {
-      curSet--;
-      document.getElementById('setNum').textContent = curSet + 1;
-    }
-  }
-  function gotoSet() {
-    var set = prompt("Please enter the set number you'd like to navigate to:", "Set Num");
-    if (set == null) {
-      return;
-    }
-    else if (set > numSets || set < 0 || isNaN(set)) {
-      window.alert("The set number you entered does not exist!");
-    }
-    else {
-      curSet = set - 1;
-      document.getElementById('setNum').textContent = curSet + 1;
-      redraw();
-    }
   }
   function playDrill() {
-
+    // TODO
   }
   function stopDrill() {
-
+    // TODO
   }
   function saveDrill() {
     // Deanna's Code
@@ -196,6 +167,12 @@ $("document").ready(function () {
       if (loadThis) {
         clearDrill();
         performerData = JSON.parse(loadThis);
+
+        if (typeof (performerData[0]) != "undefined") {
+          numSets = performerData[0].sets.length;
+          curSet = 0;
+        }
+        refreshSetDisplay();
       }
 
     }
@@ -221,13 +198,86 @@ $("document").ready(function () {
 
   }
   function clearDrill() {
-    $("#innerEditor").text("");
-    $("#setNum").text("1");
-    $("#setCount").text("1");
+    clearDisplay();
     performerData = {};
     numPerformers = 0;
-    curSet = 1;
+    curSet = 0;
     numSets = 1;
+    refreshSetDisplay();
+  }
+
+  function clearDisplay() {
+    $("#innerEditor").text("");
+  }
+  // END PERFORMER FUNCTIONS
+
+  // SET FUNCTIONS
+  function createSet() {
+    const newSet = curSet + 1;
+    for (const key of Object.keys(performerData)) {
+      performerData[key].sets[newSet] = Object.assign(performerData[key].sets[curSet]);
+    }
+    numSets++;
+    curSet++;
+    refreshSetDisplay();
+    nextSet();
+  }
+  function deleteSet() {
+    // Delete the set only if there exists more than 1 set
+    if (numSets > 1) {
+      // And assure we don't go below set 1
+      if (curSet > 0) {
+        curSet--;
+      }
+      numSets--;
+
+      // Update the performers
+      for (let performer of Object.keys(performerData)) {
+        console.log(performer);
+      }
+
+      // Redraw the set
+      redraw(curSet);
+
+      refreshSetDisplay();
+    }
+    // Otherwise, clear the drill
+    else {
+      clearDrill();
+    }
+  }
+  function prevSet() {
+    // Ensure we can go to the previous set
+    if (curSet > 0) {
+      curSet--;
+      refreshSetDisplay();
+      clearDisplay();
+      redraw(curSet);
+    }
+  }
+  function nextSet() {
+    // Ensure we can go to the next set
+    if (curSet < numSets - 1) {
+      curSet++;
+      refreshSetDisplay();
+      clearDisplay();
+      redraw(curSet);
+    }
+  }
+  function gotoSet() {
+    var set = prompt("Please enter the set number you'd like to navigate to:", "");
+    if (set == null) {
+      return;
+    }
+    else if (set > numSets || set <= 0 || isNaN(set)) {
+      window.alert("The set number you entered does not exist!");
+    }
+    else {
+      curSet = set - 1;
+      refreshSetDisplay();
+      clearDisplay();
+      redraw(curSet);
+    }
   }
 
   // Redraw should be called when:
@@ -235,16 +285,16 @@ $("document").ready(function () {
   // - a drill is loaded
 
   function redraw(redrawnSet) {
-    // Clear should be called OUTSIDE OF REDRAW
-    // First wipe all HTML from the drill editor pane
+    // clearDisplay() should be called OUTSIDE OF REDRAW
+    pNum = 0;
 
     // Reference performerData for the current set
     for (let id in performerData) {
       let thisX = performerData[id].sets[redrawnSet].x;
       let thisY = performerData[id].sets[redrawnSet].y;
-      createPerformer();
+      drawPerformer(pNum, false);
+      pNum++;
 
-      console.log(typeof (thisX));
       $(".animate").last().css("left", parseInt(thisX));
       $(".animate").last().css("top", parseInt(thisY));
 

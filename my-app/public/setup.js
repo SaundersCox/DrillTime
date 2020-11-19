@@ -7,7 +7,7 @@ var drill = {
 // Initial variables
 var numPerformers = 0;
 var curSet = 0;
-var numSets = 2;
+var numSets = 1;
 // Instruments: Trumpet, Trombone, Tuba, Clarinet, Alto Sex, Tenor Sax, Piccolo, Snare, Bass, Cymbal
 
 
