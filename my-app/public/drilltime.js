@@ -67,11 +67,15 @@ $("document").ready(function () {
 
   function drawPerformer(pNum, isNew) {
     if (isNew) {
+      tempSets = [];
+      for (i = 0; i < numSets; i++) {
+        tempSets.push({ x: 0, y: 0 });
+      }
       performerData[pNum] = {
         id: pNum,
         name: "",
         inst: "",
-        sets: [{ x: 0, y: 0 }]
+        sets: tempSets
       }
     }
 
@@ -215,7 +219,7 @@ $("document").ready(function () {
     $("#innerEditor").text("");
   }
   // END PERFORMER FUNCTIONS
-  
+
   // SET FUNCTIONS
   function createSet() {
     const newSet = curSet + 1;
