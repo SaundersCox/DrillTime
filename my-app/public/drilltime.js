@@ -132,8 +132,130 @@ $("document").ready(function () {
   }
   function playDrill() {
     // TODO
-    alert("Playback functionality is under development. Check back later.");
+    // alert("Playback functionality is under development. Check back later.");
+    count = 0;
+    curSet = 0;
+    var elems = [];
+
+    $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Stop");
+    // Store number of sets in array.
+    while (count < numSets - 1) {
+      var elem = count;
+      elems.push(elem);
+      count++;
+    }
+    playDrillHelper(elems);
+
   }
+
+  // Play helper function, using recursion.
+  function playDrillHelper(elems) {
+
+  pNum = 0;
+  var elem = elems.shift(); // Remove and return first element of array.
+  refreshSetDisplay();
+
+  // Do not clear the last set animation.
+  if (curSet < numSets - 1) {
+      clearDisplay();
+      curSet++;
+  }
+
+  // Gets the number of performer objects.
+  var count = 0;
+  for (let id in performerData) {
+      count++;
+  }
+  let iterations = count;
+  var deleteVar = []; // change name
+
+  // Reference performerData for the current set
+  for (let id in performerData) {
+
+    // Get current performers coordinates and draw them.
+    let thisX = performerData[id].sets[elem].x;
+    let thisY = performerData[id].sets[elem].y;
+    drawPerformer(pNum, false);
+    pNum++;
+
+    // Get the next sets coordinates and animate performers traversing to them.
+    let thisX2 = performerData[id].sets[elem + 1].x;
+    let thisY2 = performerData[id].sets[elem + 1].y;
+    var div = $(".animate").last().css({ left: parseInt(thisX), top: parseInt(thisY) });
+
+    //TODO stop button//////////////////////////////////////////////////////////////
+    var bool = 0; // 0 = stop, 1 = continue
+    deleteVar.push(div);
+    $("#stopButton").click(function() {
+
+      if (bool == 0) {
+        for (i = 0; i < iterations; i++) {
+            $(deleteVar[i]).stop();
+        }
+        bool = 1;
+        $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Resume");
+
+      } 
+      else {
+
+        for (i = 0; i < iterations; i++) {
+          let thisX2 = performerData[i].sets[elem + 1].x; // next set
+          let thisY2 = performerData[i].sets[elem + 1].y;
+
+          /** 
+          //Adjusts time/speed of performers. TODO
+          let thisX = performerData[i].sets[elem].x; // current set
+          let thisY = performerData[i].sets[elem].y;
+          let thisX3 = deleteVar[i].position().left;
+          let thisY3 = deleteVar[i].position().top;
+
+          //distance formula
+          var a = Math.abs(thisX2 - thisX);
+          var b = Math.abs(thisY2 - thisY);
+          var dis1 = Math.sqrt(a * a + b * b);
+          var c = Math.abs(thisX2 - thisX3);
+          var d = Math.abs(thisY2 - thisY3);
+          var dis2 = Math.sqrt(c * c + d * d);
+          //get new speed
+          var speed = 0;
+
+          if (dis1 == 0 || dis2 == 0) {
+              speed = 1;
+          } else {
+              var speed = (dis2 / dis1) * 5000;
+          }
+          */
+
+          deleteVar[i].animate({ top: thisY2, left: thisX2 }, 1000, "linear",
+            function() {
+
+              // Only perform recursion when last performer of the current set is animated.
+              if (!--iterations && curSet < numSets) {
+                  playDrillHelper(elems);
+              }
+            }
+          );
+          
+        }
+          $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Pause");
+          bool = 0;
+        }
+    });
+    //TODO stop button/////////////////////////////////////////////////////////
+
+    // Recursion used in order to animate performers sequentially.
+    div.animate({ top: thisY2, left: thisX2 }, 1000,
+        function() {
+
+            // Only perform recursion when last performer of the current set is animated.
+            if (!--iterations && curSet < numSets) {
+                playDrillHelper(elems);
+            }
+        }
+    );
+  }
+}
+
   function stopDrill() {
     // TODO
     alert("Playback functionality is under development. Check back later.");
