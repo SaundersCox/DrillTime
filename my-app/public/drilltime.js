@@ -62,6 +62,9 @@ $("document").ready(function () {
   $("#gotoSetButton").on("click", gotoSet);
   // END BUTTON ACTIONS
 
+
+  // TITLE ACTIONS
+
   let curX = 0;
   let curY = 0;
   let pNum = 0; // The counter for redrawing the performers
