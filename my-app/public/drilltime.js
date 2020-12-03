@@ -15,6 +15,7 @@ let tips = [
 
 // Initial load
 let performerData = {};
+let isPlaying = false;
 // PERFORMER FUNCTIONS
 
 
@@ -24,6 +25,7 @@ $("document").ready(function () {
   // HELPER FUNCTIONS 
   let rand = Math.floor(Math.random() * tips.length);
   $("#nextTipButton").on("click", nextTip);
+
 
   function randomizeTip() {
     rand = Math.floor(Math.random() * tips.length);
@@ -61,9 +63,6 @@ $("document").ready(function () {
   $("#nextSetButton").on("click", nextSet);
   $("#gotoSetButton").on("click", gotoSet);
   // END BUTTON ACTIONS
-
-
-  // TITLE ACTIONS
 
   let curX = 0;
   let curY = 0;
@@ -135,13 +134,17 @@ $("document").ready(function () {
 
   }
   function playDrill() {
+    if (isPlaying) {
+      return;
+    }
+    isPlaying = true;
     // TODO
     // alert("Playback functionality is under development. Check back later.");
     count = 0;
     curSet = 0;
     var elems = [];
 
-    $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Stop");
+
     // Store number of sets in array.
     while (count < numSets - 1) {
       var elem = count;
@@ -173,6 +176,8 @@ $("document").ready(function () {
     let iterations = count;
     var deleteVar = []; // change name
 
+
+
     // Reference performerData for the current set
     for (let id in performerData) {
 
@@ -190,67 +195,16 @@ $("document").ready(function () {
       //TODO stop button//////////////////////////////////////////////////////////////
       var bool = 0; // 0 = stop, 1 = continue
       deleteVar.push(div);
-      $("#stopButton").click(function () {
 
-        if (bool == 0) {
-          for (i = 0; i < iterations; i++) {
-            $(deleteVar[i]).stop();
-          }
-          bool = 1;
-          $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Resume");
-
-        }
-        else {
-
-          for (i = 0; i < iterations; i++) {
-            let thisX2 = performerData[i].sets[elem + 1].x; // next set
-            let thisY2 = performerData[i].sets[elem + 1].y;
-
-            /** 
-            //Adjusts time/speed of performers. TODO
-            let thisX = performerData[i].sets[elem].x; // current set
-            let thisY = performerData[i].sets[elem].y;
-            let thisX3 = deleteVar[i].position().left;
-            let thisY3 = deleteVar[i].position().top;
-
-            //distance formula
-            var a = Math.abs(thisX2 - thisX);
-            var b = Math.abs(thisY2 - thisY);
-            var dis1 = Math.sqrt(a * a + b * b);
-            var c = Math.abs(thisX2 - thisX3);
-            var d = Math.abs(thisY2 - thisY3);
-            var dis2 = Math.sqrt(c * c + d * d);
-            //get new speed
-            var speed = 0;
-
-            if (dis1 == 0 || dis2 == 0) {
-                speed = 1;
-            } else {
-                var speed = (dis2 / dis1) * 5000;
-            }
-            */
-
-            deleteVar[i].animate({ top: thisY2, left: thisX2 }, 1000, "linear",
-              function () {
-
-                // Only perform recursion when last performer of the current set is animated.
-                if (!--iterations && curSet < numSets) {
-                  playDrillHelper(elems);
-                }
-              }
-            );
-
-          }
-          $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Pause");
-          bool = 0;
-        }
-      });
       //TODO stop button/////////////////////////////////////////////////////////
 
       // Recursion used in order to animate performers sequentially.
       div.animate({ top: thisY2, left: thisX2 }, 1000,
         function () {
-
+          if (!isPlaying) {
+            redraw();
+            return;
+          }
           // Only perform recursion when last performer of the current set is animated.
           if (!--iterations && curSet < numSets) {
             playDrillHelper(elems);
@@ -258,11 +212,72 @@ $("document").ready(function () {
         }
       );
     }
+    setTimeout(function () { isPlaying = false }, 1000 * numSets);
   }
 
   function stopDrill() {
     // TODO
-    alert("Playback functionality is under development. Check back later.");
+    isPlaying = false;
+
+    // $("#stopButton").click(function () {
+
+    //   if (bool == 0) {
+    //     for (i = 0; i < iterations; i++) {
+    //       $(deleteVar[i]).stop();
+    //     }
+    //     bool = 1;
+    //     $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Resume");
+
+    //   }
+    //   else {
+
+    //     for (i = 0; i < iterations; i++) {
+    //       let thisX2 = performerData[i].sets[elem + 1].x; // next set
+    //       let thisY2 = performerData[i].sets[elem + 1].y;
+
+    //       /** 
+    //       //Adjusts time/speed of performers. TODO
+    //       let thisX = performerData[i].sets[elem].x; // current set
+    //       let thisY = performerData[i].sets[elem].y;
+    //       let thisX3 = deleteVar[i].position().left;
+    //       let thisY3 = deleteVar[i].position().top;
+
+    //       //distance formula
+    //       var a = Math.abs(thisX2 - thisX);
+    //       var b = Math.abs(thisY2 - thisY);
+    //       var dis1 = Math.sqrt(a * a + b * b);
+    //       var c = Math.abs(thisX2 - thisX3);
+    //       var d = Math.abs(thisY2 - thisY3);
+    //       var dis2 = Math.sqrt(c * c + d * d);
+    //       //get new speed
+    //       var speed = 0;
+
+    //       if (dis1 == 0 || dis2 == 0) {
+    //           speed = 1;
+    //       } else {
+    //           var speed = (dis2 / dis1) * 5000;
+    //       }
+    //       */
+
+    //       deleteVar[i].animate({ top: thisY2, left: thisX2 }, 1000, "linear",
+    //         function () {
+    //           if (!isPlaying) {
+    //             redraw();
+    //             return;
+    //           }
+
+    //           // Only perform recursion when last performer of the current set is animated.
+    //           if (!--iterations && curSet < numSets) {
+    //             playDrillHelper(elems);
+    //           }
+    //         }
+    //       );
+
+    //     }
+    //     $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Pause");
+    //     bool = 0;
+    //   }
+    // });
   }
   function saveDrill() {
     // Deanna's Code
@@ -352,6 +367,7 @@ $("document").ready(function () {
     }
     redraw(0);
   }
+
   function clearDrill() {
     clearDisplay();
     performerData = {};
