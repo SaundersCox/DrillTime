@@ -348,21 +348,6 @@ $("document").ready(function () {
       // alert("The JSON string was invalid");
     }
     redraw(0);
-    //Deanna's code
-    // performerData = {"0":{"id":0,"name":"Alice","inst":"","sets":[{"x":150,"y":100}]},
-    // "1":{"id":1,"name":"Tom","inst":"","sets":[{"x":250,"y":100}]},
-    // "2":{"id":2,"name":"Brett","inst":"","sets":[{"x":350,"y":100}]},
-    // "3":{"id":3,"name":"Matt","inst":"","sets":[{"x":150,"y":150}]},
-    // "4":{"id":4,"name":"Finne","inst":"","sets":[{"x":250,"y":150}]},
-    // "5":{"id":5,"name":"George","inst":"","sets":[{"x":350,"y":150}]},
-    // "6":{"id":6,"name":"Colin","inst":"","sets":[{"x":150,"y":350}]},
-    // "7":{"id":7,"name":"Max","inst":"","sets":[{"x":250,"y":350}]},
-    // "8":{"id":8,"name":"Diona","inst":"","sets":[{"x":350,"y":350}]},
-    // "9":{"id":9,"name":"Erik","inst":"","sets":[{"x":150,"y":400}]},
-    // "10":{"id":10,"name":"Jim","inst":"","sets":[{"x":250,"y":400}]},
-    // "11":{"id":11,"name":"Josh","inst":"","sets":[{"x":350,"y":400}]}}
-    // redraw();
-
   }
   function clearDrill() {
     clearDisplay();
@@ -484,7 +469,7 @@ $("document").ready(function () {
   initDrill($("#sample4").text());
 
   // Title updater
-  
+
 
   // $('h2').click(function () {
   //   $(this).hide();

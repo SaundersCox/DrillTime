@@ -41,7 +41,7 @@ div.drill-editor-panel {
     float: right;
 }
 
-#sample1, #sample2, #sample3 {
+.sample {
     height: 80%;
 }
 
