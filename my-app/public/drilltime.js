@@ -158,14 +158,14 @@ $("document").ready(function () {
 
     // Do not clear the last set animation.
     if (curSet < numSets - 1) {
-        clearDisplay();
-        curSet++;
+      clearDisplay();
+      curSet++;
     }
 
     // Gets the number of performer objects.
     var count = 0;
     for (let id in performerData) {
-        count++;
+      count++;
     }
     let iterations = count;
     var deleteVar = []; // change name
@@ -187,16 +187,16 @@ $("document").ready(function () {
       //TODO stop button//////////////////////////////////////////////////////////////
       var bool = 0; // 0 = stop, 1 = continue
       deleteVar.push(div);
-      $("#stopButton").click(function() {
+      $("#stopButton").click(function () {
 
         if (bool == 0) {
           for (i = 0; i < iterations; i++) {
-              $(deleteVar[i]).stop();
+            $(deleteVar[i]).stop();
           }
           bool = 1;
           $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Resume");
 
-        } 
+        }
         else {
 
           for (i = 0; i < iterations; i++) {
@@ -228,34 +228,34 @@ $("document").ready(function () {
             */
 
             deleteVar[i].animate({ top: thisY2, left: thisX2 }, 1000, "linear",
-              function() {
+              function () {
 
                 // Only perform recursion when last performer of the current set is animated.
                 if (!--iterations && curSet < numSets) {
-                    playDrillHelper(elems);
+                  playDrillHelper(elems);
                 }
               }
             );
-            
+
           }
-            $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Pause");
-            bool = 0;
-          }
+          $("#stopButton").html("<i class='fa fa-stop w3-xxlarge'></i> <br><br> Pause");
+          bool = 0;
+        }
       });
       //TODO stop button/////////////////////////////////////////////////////////
 
       // Recursion used in order to animate performers sequentially.
       div.animate({ top: thisY2, left: thisX2 }, 1000,
-          function() {
+        function () {
 
-              // Only perform recursion when last performer of the current set is animated.
-              if (!--iterations && curSet < numSets) {
-                  playDrillHelper(elems);
-              }
+          // Only perform recursion when last performer of the current set is animated.
+          if (!--iterations && curSet < numSets) {
+            playDrillHelper(elems);
           }
+        }
       );
     }
-  } 
+  }
 
   function stopDrill() {
     // TODO
@@ -400,14 +400,14 @@ $("document").ready(function () {
         performerData[key].sets.splice(curSet, 1);
         count++;
       }
-      
+
       numSets--;
 
       // And assure we don't go below set 1
       if (curSet > 0) {
         curSet--;
       }
-      
+
 
       // Update the performers
       // for (let performer of Object.keys(performerData)) {
@@ -481,10 +481,48 @@ $("document").ready(function () {
   }
 
   // Initial load
-  initDrill($("#sample3").text());
+  initDrill($("#sample4").text());
+
+  // Title updater
+  
+
+  // $('h2').click(function () {
+  //   $(this).hide();
+  //   $(this).prev().hide();
+  //   $(this).next().show();
+  //   $(this).next().select();
+  // });
+
+  $('input[type="text"]').blur(function () {
+    if ($.trim(this.value) == '') {
+      this.value = (this.defaultValue ? this.defaultValue : '');
+    }
+    else {
+      $(this).prev().prev().html(this.value);
+    }
+
+    $(this).hide();
+    $(this).prev().show();
+    $(this).prev().prev().show();
+  });
+
+  $('input[type="text"]').keypress(function (event) {
+    if (event.keyCode == '13') {
+      if ($.trim(this.value) == '') {
+        this.value = (this.defaultValue ? this.defaultValue : '');
+      }
+      else {
+        $(this).prev().prev().html(this.value);
+      }
+
+      $(this).hide();
+      $(this).prev().show();
+      $(this).prev().prev().show();
+    }
+  });
+
+
 })
-
-
 
 
 
