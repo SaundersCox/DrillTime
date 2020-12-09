@@ -16,12 +16,13 @@ let tips = [
 // Initial load
 let performerData = {};
 let isPlaying = false;
+var timer;
 // PERFORMER FUNCTIONS
 
 
 $("document").ready(function() {
 
-
+    //$("#innerEditor").css("color", "blue");
     // HELPER FUNCTIONS 
     let rand = Math.floor(Math.random() * tips.length);
     $("#nextTipButton").on("click", nextTip);
@@ -91,6 +92,7 @@ $("document").ready(function() {
             $("#p-" + pNum).html("");
             $(this).addClass('hover2').append('X');
             $("#p-" + pNum).dblclick(function() {
+                $("#p-" + pNum).attr('disabled', true); // disable recursion
                 $("#p-" + pNum).remove();
                 delete performerData[pNum];
             });
@@ -178,6 +180,8 @@ $("document").ready(function() {
         if (curSet < numSets - 1) {
             clearDisplay();
             curSet++;
+        } else if (curSet == numSets - 1) {
+            isPlaying = false; //Program is finished, end program.
         }
 
         // Gets the number of performer objects.
@@ -188,47 +192,47 @@ $("document").ready(function() {
         let iterations = count;
         var deleteVar = []; // change name
 
-
-
         // Reference performerData for the current set
-        for (let id in performerData) {
+        if (isPlaying) {
+            for (let id in performerData) {
 
-            // Get current performers coordinates and draw them.
-            let thisX = performerData[id].sets[elem].x;
-            let thisY = performerData[id].sets[elem].y;
-            drawPerformer(pNum, false);
-            pNum++;
+                // Get current performers coordinates and draw them.
+                let thisX = performerData[id].sets[elem].x;
+                let thisY = performerData[id].sets[elem].y;
+                drawPerformer(pNum, false);
+                pNum++;
 
-            // Get the next sets coordinates and animate performers traversing to them.
-            let thisX2 = performerData[id].sets[elem + 1].x;
-            let thisY2 = performerData[id].sets[elem + 1].y;
-            var div = $(".animate").last().css({ left: parseInt(thisX), top: parseInt(thisY) });
+                // Get the next sets coordinates and animate performers traversing to them.
+                let thisX2 = performerData[id].sets[elem + 1].x;
+                let thisY2 = performerData[id].sets[elem + 1].y;
+                var div = $(".animate").last().css({ left: parseInt(thisX), top: parseInt(thisY) });
+                var bool = 0; // 0 = stop, 1 = continue
+                deleteVar.push(div);
 
-            //TODO stop button//////////////////////////////////////////////////////////////
-            var bool = 0; // 0 = stop, 1 = continue
-            deleteVar.push(div);
-
-            //TODO stop button/////////////////////////////////////////////////////////
-
-            // Recursion used in order to animate performers sequentially.
-            div.animate({ top: thisY2, left: thisX2 }, 1000,
-                function() {
-                    if (!isPlaying) {
-                        redraw();
-                        return;
+                // Recursion used in order to animate performers sequentially.
+                div.animate({ top: thisY2, left: thisX2 }, 1000,
+                    function() {
+                        if (!isPlaying) {
+                            redraw();
+                            return;
+                        }
+                        // Only perform recursion when last performer of the current set is animated.
+                        if (!--iterations && curSet < numSets) {
+                            timer = playDrillHelper(elems);
+                        }
                     }
-                    // Only perform recursion when last performer of the current set is animated.
-                    if (!--iterations && curSet < numSets) {
-                        playDrillHelper(elems);
-                    }
-                }
-            );
+                );
+            }
+        } else {
+            //setTimeout(function() { isPlaying = false }, 1000 * numSets);
+            clearTimeout(timer); // timeout for recursion
+            isPlaying = false;
+            return;
         }
-        setTimeout(function() { isPlaying = false }, 1000 * numSets);
+
     }
 
     function stopDrill() {
-        // TODO
         isPlaying = false;
 
         // $("#stopButton").click(function () {
