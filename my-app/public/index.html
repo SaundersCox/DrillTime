@@ -73,7 +73,7 @@
     width: 950px;
     height: 500px;
     position: relative;
-    background: url(field.png);
+    background: url(./field.png);
     background-size: 940px 485px;
     border: 10px solid #618b30;
   }
@@ -219,7 +219,21 @@
         <span id="titleSection">
           &nbsp;
           Title:
-          <span id="titleDisplay" style=>Default</span>
+          <span id="titleDisplay">Default</span>
+        </span>
+
+        <span id="sampleSection">
+          &nbsp;| &nbsp;
+
+          <label for="samples">Sample:</label>
+
+          <select name="samples" id="samples">
+            <option value="basic3">Basic 3</option>
+            <option value="star5">Star 5</option>
+            <option value="bird5">Bird 5</option>
+            <option value="march6">March 6</option>
+            <option selected="selected" value="circle16">Circle 16</option>
+          </select>
         </span>
 
       </h2>
