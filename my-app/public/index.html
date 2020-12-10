@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" href="./favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Simple web app to design and study marching drills" />
@@ -142,10 +142,51 @@
   #titleDisplay {
     hover: underline;
   }
+
+  #overlay {
+    z-index: 5;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+  }
+
+  #popup {
+    max-width: 600px;
+    width: 80%;
+    max-height: 450px;
+    height: 80%;
+    padding: 20px;
+    position: relative;
+    background: #8bc34a;
+    margin: 20px auto;
+  }
+
+  #close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #000;
+  }
 </style>
 
 
 <body class="w3-light-green">
+  <div id="overlay">
+    <div id="popup">
+      <div id="close">X</div>
+      <h2>Video Guide</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/DNe0ZUD19EE" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
 
   <!-- Buttons -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
@@ -263,8 +304,8 @@
           <p>Goto Set</p>
         </a>
         <!-- TODO -->
-        <a href="http://google.com" rel=noopener id="helpButton"
-          class="w3-bar-item w3-button w3-padding-large w3-light-green">
+        <a href="#" rel=noopener id="helpButton"
+          class="img-responsive w3-bar-item w3-button w3-padding-large w3-light-green">
           <em class="fa fa-question w3-xxlarge"></em>
           <p>Help</p>
         </a>
@@ -298,6 +339,9 @@
       X: [<span id="xPos">0</span>]
       Y: [<span id="yPos">0</span>]
     </div>
+
+
+
 
     <!-- Footer -->
     <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">

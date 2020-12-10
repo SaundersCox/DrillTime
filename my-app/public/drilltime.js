@@ -101,6 +101,14 @@ $("document").ready(function () {
         }
     }
 
+    $('#helpButton').click(function () {
+        $('#overlay').fadeIn(300);
+    });
+
+    $('#close').click(function () {
+        $('#overlay').fadeOut(300);
+    });
+
     // Sets the curSet and numSets variables to be displayed
     document.getElementById('setNum').textContent = curSet + 1;
     document.getElementById('setCount').textContent = numSets;
@@ -448,7 +456,7 @@ $("document").ready(function () {
     }
 
     function clearDrill() {
-        
+
         clearDisplay();
         performerData = { title: "Default" };
         $("#titleDisplay").text("Default");
