@@ -72,6 +72,9 @@ $("document").ready(function () {
             $("select option:selected").each(function () {
                 let sample = ($(this).text());
 
+                stopDrill();
+                clearDrill();
+
                 if (sample == "Basic 3") {
                     initDrill(march3basic);
                 }
@@ -235,6 +238,7 @@ $("document").ready(function () {
         // Gets the number of performer objects.
         var count = 0;
         for (let id in performerData) {
+            if (id == "title") continue;
             count++;
         }
         let iterations = count;
@@ -245,7 +249,7 @@ $("document").ready(function () {
             for (let id in performerData) {
                 if (id == "title") continue;
                 // Get current performers coordinates and draw them.
-                console.log(performerData[id].sets[elem]);
+                // console.log(performerData[id].sets[elem]);
                 let thisX = performerData[id].sets[elem].x;
                 let thisY = performerData[id].sets[elem].y;
                 drawPerformer(pNum, false);
@@ -437,6 +441,7 @@ $("document").ready(function () {
     function clearDrill() {
         clearDisplay();
         performerData = { title: "Default" };
+        $("#titleDisplay").text("Default");
         numPerformers = 0;
         curSet = 0;
         numSets = 1;
@@ -452,6 +457,7 @@ $("document").ready(function () {
     function createSet() {
         const newSet = curSet + 1;
         for (const key of Object.keys(performerData)) {
+            if (key == "title") continue;
             performerData[key].sets.splice(newSet, 0, Object.assign(performerData[key].sets[curSet]));
             // performerData[key].sets[newSet] = Object.assign(performerData[key].sets[curSet]);
         }
@@ -467,6 +473,7 @@ $("document").ready(function () {
             // Delete the set "curSet"
             count = 0;
             for (const key of Object.keys(performerData)) {
+                if (key == "title") continue;
                 $("#p-" + count).remove();
                 performerData[key].sets.splice(curSet, 1);
                 count++;
