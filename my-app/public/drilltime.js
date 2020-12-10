@@ -14,7 +14,7 @@ let tips = [
 // Saunders' Code
 
 // Initial load
-let performerData = {};
+let performerData = {title: "Default"};
 let isPlaying = false;
 var timer;
 // PERFORMER FUNCTIONS
