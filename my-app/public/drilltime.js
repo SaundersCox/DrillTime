@@ -427,6 +427,11 @@ $("document").ready(function() {
 
     // SET FUNCTIONS
     function createSet() {
+    //returns if messing with sets while playing
+    if (isPlaying) {
+        return;
+    }
+
         const newSet = curSet + 1;
         for (const key of Object.keys(performerData)) {
             performerData[key].sets.splice(newSet, 0, Object.assign(performerData[key].sets[curSet]));
@@ -439,6 +444,11 @@ $("document").ready(function() {
     }
 
     function deleteSet() {
+        //returns if messing with sets while playing
+        if (isPlaying) {
+            return;
+        }
+
         // Delete the set only if there exists more than 1 set
         if (numSets > 1) {
             // Delete the set "curSet"
@@ -474,6 +484,10 @@ $("document").ready(function() {
     }
 
     function prevSet() {
+        //returns if messing with sets while playing
+        if (isPlaying) {
+            return;
+        }
         // Ensure we can go to the previous set
         if (curSet > 0) {
             curSet--;
@@ -484,6 +498,10 @@ $("document").ready(function() {
     }
 
     function nextSet() {
+        //returns if messing with sets while playing
+        if (isPlaying) {
+            return;
+        }
         // Ensure we can go to the next set
         if (curSet < numSets - 1) {
             curSet++;
