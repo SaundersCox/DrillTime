@@ -95,6 +95,12 @@ $("document").ready(function () {
         })
     // .trigger("change");
 
+    function clearDrillPrompt() {
+        if (confirm("Are you sure you want to clear the entire drill? This includes all performers and all sets. There is no undo!")) {
+            clearDrill();
+        }
+    }
+
     // Sets the curSet and numSets variables to be displayed
     document.getElementById('setNum').textContent = curSet + 1;
     document.getElementById('setCount').textContent = numSets;
@@ -107,7 +113,7 @@ $("document").ready(function () {
     $("#stopButton").on("click", stopDrill);
     $("#saveButton").on("click", saveDrill);
     $("#loadButton").on("click", loadDrill);
-    $("#clearButton").on("click", clearDrill);
+    $("#clearButton").on("click", clearDrillPrompt);
 
     $("#createSetButton").on("click", createSet);
     $("#deleteSetButton").on("click", deleteSet);
@@ -361,6 +367,9 @@ $("document").ready(function () {
         // downloadAnchorNode.remove();
 
         // Saunders' Code
+        if (!confirm("Would you like to save the performer data to your computer's clipboard? Warning: This will overwrite the current contents of the clipboard!")) {
+            return;
+        }
         if (Object.keys(performerData).length == 0) {
             alert("No performer data has been recorded");
         } else {
@@ -376,14 +385,14 @@ $("document").ready(function () {
                 document.body.removeChild(el);
             };
             copyToClipboard();
-            alert("Copied performer data successfully");
+            alert("Copied performer data successfully to the clipboard. Consider pasting this data to a text file for future use (Ctrl+V on Windows, Cmd+V on Mac)");
         }
 
     }
 
     function loadDrill() {
         try {
-            let loadThis = prompt("Please enter the saved JSON string.\nNote: This will erase your current drill!", "");
+            let loadThis = prompt("Please enter previously saved data. To copy from a saved text file, use Ctrl+C on Windows or Cmd+C on Mac. Then paste it here with Ctrl+V on Windows or Cmd+V on Mac\nNote: This will erase your current drill!", "");
             if (loadThis) {
                 clearDrill();
                 performerData = JSON.parse(loadThis);
@@ -439,6 +448,7 @@ $("document").ready(function () {
     }
 
     function clearDrill() {
+        
         clearDisplay();
         performerData = { title: "Default" };
         $("#titleDisplay").text("Default");
