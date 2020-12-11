@@ -20,7 +20,7 @@ var timer;
 // PERFORMER FUNCTIONS
 
 
-$("document").ready(function () {
+$("document").ready(function() {
 
     // SAMPLE LOAD DATA
 
@@ -57,7 +57,7 @@ $("document").ready(function () {
         $("#setCount").text(numSets);
     }
 
-    $("#titleSection").click(function () {
+    $("#titleSection").click(function() {
         let input = prompt("Please enter a title for this drill");
         if (input == null || input == "") {
             return;
@@ -67,9 +67,9 @@ $("document").ready(function () {
     });
 
     $("select")
-        .change(function () {
+        .change(function() {
 
-            $("select option:selected").each(function () {
+            $("select option:selected").each(function() {
                 let sample = ($(this).text());
 
                 stopDrill();
@@ -77,23 +77,19 @@ $("document").ready(function () {
 
                 if (sample == "Basic 3") {
                     initDrill(march3basic);
-                }
-                else if (sample == "Star 5") {
+                } else if (sample == "Star 5") {
                     initDrill(march5star);
-                }
-                else if (sample == "Bird 5") {
+                } else if (sample == "Bird 5") {
                     initDrill(march5bird);
-                }
-                else if (sample == "March 6") {
+                } else if (sample == "March 6") {
                     initDrill(march6man);
-                }
-                else if (sample == "Circle 16") {
+                } else if (sample == "Circle 16") {
                     initDrill(march16man);
                 }
             });
             // $("div").text(str);
         })
-    // .trigger("change");
+        // .trigger("change");
 
     function clearDrillPrompt() {
         if (confirm("Are you sure you want to clear the entire drill? This includes all performers and all sets. There is no undo!")) {
@@ -101,11 +97,11 @@ $("document").ready(function () {
         }
     }
 
-    $('#helpButton').click(function () {
+    $('#helpButton').click(function() {
         $('#overlay').fadeIn(300);
     });
 
-    $('#close').click(function () {
+    $('#close').click(function() {
         $('#overlay').fadeOut(300);
     });
 
@@ -150,18 +146,21 @@ $("document").ready(function () {
 
         // // console.log("Create");
         $("#innerEditor").append("<div id=\"p-" + pNum + "\" class=\"animate\">" + pNum + "</div>")
-        // Delete Performer 
+            // Delete Performer 
         var str;
-        $("#p-" + pNum).hover(function () {
+        $("#p-" + pNum).hover(function() {
             str = $("#p-" + pNum).text();
             $("#p-" + pNum).html("");
             $(this).addClass('hover2').append('X');
-            $("#p-" + pNum).dblclick(function () {
+            $("#p-" + pNum).dblclick(function() {
                 $("#p-" + pNum).attr('disabled', true); // disable recursion
                 $("#p-" + pNum).remove();
-                delete performerData[pNum];
+                for (i = 0; i < numSets; i++) {
+                    performerData[pNum].sets[i] = { x: -100, y: -100 };
+                }
+                //delete performerData[pNum];
             });
-        }, function () {
+        }, function() {
             $("#p-" + pNum).html(str);
             $(this).removeClass('hover2').find('button').remove();
         });
@@ -174,7 +173,7 @@ $("document").ready(function () {
             containment: '#innerEditor',
             scroll: true,
             // When releasing the performer, we want to record their location
-            stop: function () {
+            stop: function() {
                 // console.log(pNum)
                 // console.log(curSet);
                 // Case: current set is out of bounds
@@ -186,7 +185,7 @@ $("document").ready(function () {
 
                 // console.log(performerData[pNum].sets);
             },
-            drag: function (e, ui) {
+            drag: function(e, ui) {
                 curX = ui.position.left;
                 curY = ui.position.top;
                 $("#xPos").text(curX);
@@ -256,7 +255,7 @@ $("document").ready(function () {
             count++;
         }
         let iterations = count;
-        var deleteVar = []; // change name
+        //var deleteVar = []; // change name
 
         // Reference performerData for the current set
         if (isPlaying) {
@@ -264,31 +263,36 @@ $("document").ready(function () {
                 if (id == "title") continue;
                 // Get current performers coordinates and draw them.
                 // console.log(performerData[id].sets[elem]);
-                let thisX = performerData[id].sets[elem].x;
-                let thisY = performerData[id].sets[elem].y;
-                drawPerformer(pNum, false);
-                pNum++;
+                if (performerData[id].sets[0].x != -100) {
+                    let thisX = performerData[id].sets[elem].x;
+                    let thisY = performerData[id].sets[elem].y;
+                    drawPerformer(pNum, false);
+                    //pNum++;
 
-                // Get the next sets coordinates and animate performers traversing to them.
-                let thisX2 = performerData[id].sets[elem + 1].x;
-                let thisY2 = performerData[id].sets[elem + 1].y;
-                var div = $(".animate").last().css({ left: parseInt(thisX), top: parseInt(thisY) });
-                var bool = 0; // 0 = stop, 1 = continue
-                deleteVar.push(div);
+                    // Get the next sets coordinates and animate performers traversing to them.
+                    let thisX2 = performerData[id].sets[elem + 1].x;
+                    let thisY2 = performerData[id].sets[elem + 1].y;
+                    var div = $(".animate").last().css({ left: parseInt(thisX), top: parseInt(thisY) });
+                    //var bool = 0; // 0 = stop, 1 = continue
+                    //deleteVar.push(div);
 
-                // Recursion used in order to animate performers sequentially.
-                div.animate({ top: thisY2, left: thisX2 }, 1000,
-                    function () {
-                        if (!isPlaying) {
-                            redraw();
-                            return;
+                    // Recursion used in order to animate performers sequentially.
+                    div.animate({ top: thisY2, left: thisX2 }, 1000,
+                        function() {
+                            if (!isPlaying) {
+                                redraw();
+                                return;
+                            }
+                            // Only perform recursion when last performer of the current set is animated.
+                            if (!--iterations && curSet < numSets) {
+                                timer = playDrillHelper(elems);
+                            }
                         }
-                        // Only perform recursion when last performer of the current set is animated.
-                        if (!--iterations && curSet < numSets) {
-                            timer = playDrillHelper(elems);
-                        }
-                    }
-                );
+                    );
+                } else {
+                    --iterations;
+                }
+                pNum++
             }
         } else {
             //setTimeout(function() { isPlaying = false }, 1000 * numSets);
@@ -406,14 +410,14 @@ $("document").ready(function () {
                 performerData = JSON.parse(loadThis);
                 numPerformers = Object.keys(performerData).length;
 
-                if (typeof (performerData[0]) != "undefined") {
+                if (typeof(performerData[0]) != "undefined") {
                     numSets = performerData[0].sets.length;
                     curSet = 0;
                 }
                 refreshSetDisplay();
                 $("#titleDisplay").text(performerData.title);
             }
-
+            numPerformers--;
         } catch (err) {
             alert(err);
             // alert("The JSON string was invalid");
@@ -442,11 +446,12 @@ $("document").ready(function () {
             performerData = JSON.parse(loadThis);
             numPerformers = Object.keys(performerData).length;
 
-            if (typeof (performerData[0]) != "undefined") {
+            if (typeof(performerData[0]) != "undefined") {
                 numSets = performerData[0].sets.length;
                 curSet = 0;
             }
             refreshSetDisplay();
+            numPerformers--;
         } catch (err) {
             alert(err);
             // alert("The JSON string was invalid");
@@ -572,16 +577,15 @@ $("document").ready(function () {
             if (performerData[id].sets[redrawnSet] == undefined) {
                 continue;
             }
-            let thisX = performerData[id].sets[redrawnSet].x;
-            let thisY = performerData[id].sets[redrawnSet].y;
+            if (performerData[id].sets[0].x != -100) {
+                let thisX = performerData[id].sets[redrawnSet].x;
+                let thisY = performerData[id].sets[redrawnSet].y;
 
-
-            drawPerformer(pNum, false);
+                drawPerformer(pNum, false);
+                $(".animate").last().css("left", parseInt(thisX));
+                $(".animate").last().css("top", parseInt(thisY));
+            }
             pNum++;
-
-            $(".animate").last().css("left", parseInt(thisX));
-            $(".animate").last().css("top", parseInt(thisY));
-
         }
         // Build all
     }
@@ -599,7 +603,7 @@ $("document").ready(function () {
     //   $(this).next().select();
     // });
 
-    $('input[type="text"]').blur(function () {
+    $('input[type="text"]').blur(function() {
         if ($.trim(this.value) == '') {
             this.value = (this.defaultValue ? this.defaultValue : '');
         } else {
@@ -611,7 +615,7 @@ $("document").ready(function () {
         $(this).prev().prev().show();
     });
 
-    $('input[type="text"]').keypress(function (event) {
+    $('input[type="text"]').keypress(function(event) {
         if (event.keyCode == '13') {
             if ($.trim(this.value) == '') {
                 this.value = (this.defaultValue ? this.defaultValue : '');
