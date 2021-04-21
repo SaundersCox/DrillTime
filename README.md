@@ -1,7 +1,7 @@
 # DrillTime
 Digital marching band drills for quick creation and quick sharing
 
-Featured on Virginia Tech's Computer Science [Wordpress](https://canvas.vt.edu/users/105075/files/16427612/preview?verifier=rtt2cASedyrsmexNp6jdjGlJskEqcV1tOP5pVTpY)
+Featured on Virginia Tech's Computer Science [Wordpress](https://wordpress.cs.vt.edu/ccs2020f/2020/12/13/drilltime/)
 
 ## Website
 https://vibrant-swartz-0f8e1f.netlify.app/my-app/public/index.html
